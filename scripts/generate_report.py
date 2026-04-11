@@ -283,70 +283,66 @@ def generate_html(analysis: dict) -> str:
 <title>rTMS Brain &middot; 重複經顱磁刺激文獻日報 &middot; {date_display}</title>
 <meta name="description" content="{date_display} rTMS 重複經顱磁刺激文獻日報，由 AI 自動彙整 PubMed 最新論文"/>
 <style>
-  :root {{ --bg: #0a0e1a; --surface: #111827; --line: #1e293b; --text: #e2e8f0; --muted: #94a3b8; --accent: #38bdf8; --accent2: #818cf8; --accent-soft: rgba(56,189,248,0.12); --card-bg: #1a2236; --glow: rgba(56,189,248,0.15); }}
+  :root {{ --bg: #f6f1e8; --surface: #fffaf2; --line: #d8c5ab; --text: #2b2118; --muted: #766453; --accent: #8c4f2b; --accent-soft: #ead2bf; --card-bg: color-mix(in srgb, var(--surface) 92%, white); }}
   *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
-  body {{ background: var(--bg); color: var(--text); font-family: "Noto Sans TC", "PingFang TC", "Helvetica Neue", Arial, sans-serif; min-height: 100vh; overflow-x: hidden; }}
-  body::before {{ content: ''; position: fixed; top: -40%; left: -20%; width: 80%; height: 80%; background: radial-gradient(circle, rgba(56,189,248,0.06) 0%, transparent 70%); pointer-events: none; z-index: 0; }}
-  body::after {{ content: ''; position: fixed; bottom: -30%; right: -15%; width: 60%; height: 60%; background: radial-gradient(circle, rgba(129,140,248,0.05) 0%, transparent 70%); pointer-events: none; z-index: 0; }}
-  .container {{ position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 60px 32px 80px; }}
+  body {{ background: radial-gradient(circle at top, #fff6ea 0, var(--bg) 55%, #ead8c6 100%); color: var(--text); font-family: "Noto Sans TC", "PingFang TC", "Helvetica Neue", Arial, sans-serif; min-height: 100vh; overflow-x: hidden; }}
+  .container {{ position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding: 60px 32px 80px; }}
   header {{ display: flex; align-items: center; gap: 16px; margin-bottom: 52px; animation: fadeDown 0.6s ease both; }}
-  .logo {{ width: 52px; height: 52px; border-radius: 16px; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; box-shadow: 0 4px 24px var(--glow); }}
-  .header-text h1 {{ font-size: 22px; font-weight: 700; color: #fff; letter-spacing: -0.3px; }}
+  .logo {{ width: 48px; height: 48px; border-radius: 14px; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; box-shadow: 0 4px 20px rgba(140,79,43,0.25); }}
+  .header-text h1 {{ font-size: 22px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }}
   .header-meta {{ display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; align-items: center; }}
   .badge {{ display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; letter-spacing: 0.3px; }}
-  .badge-date {{ background: rgba(56,189,248,0.15); border: 1px solid rgba(56,189,248,0.3); color: var(--accent); }}
-  .badge-count {{ background: rgba(129,140,248,0.12); border: 1px solid rgba(129,140,248,0.25); color: var(--accent2); }}
+  .badge-date {{ background: var(--accent-soft); border: 1px solid var(--line); color: var(--accent); }}
+  .badge-count {{ background: rgba(140,79,43,0.06); border: 1px solid var(--line); color: var(--muted); }}
   .badge-source {{ background: transparent; color: var(--muted); font-size: 11px; padding: 0 4px; }}
-  .summary-card {{ background: var(--card-bg); border: 1px solid var(--line); border-radius: 24px; padding: 28px 32px; margin-bottom: 32px; box-shadow: 0 20px 60px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.03); animation: fadeUp 0.5s ease 0.1s both; }}
+  .summary-card {{ background: var(--card-bg); border: 1px solid var(--line); border-radius: 24px; padding: 28px 32px; margin-bottom: 32px; box-shadow: 0 20px 60px rgba(61,36,15,0.06); animation: fadeUp 0.5s ease 0.1s both; }}
   .summary-card h2 {{ font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.6px; color: var(--accent); margin-bottom: 16px; }}
   .summary-text {{ font-size: 15px; line-height: 1.8; color: var(--text); }}
   .section {{ margin-bottom: 36px; animation: fadeUp 0.5s ease both; }}
-  .section-title {{ display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }}
+  .section-title {{ display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }}
   .section-icon {{ width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; background: var(--accent-soft); }}
-  .news-card {{ background: var(--card-bg); border: 1px solid var(--line); border-radius: 24px; padding: 22px 26px; margin-bottom: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.2); transition: background 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s; }}
-  .news-card:hover {{ transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(56,189,248,0.2); border-color: rgba(56,189,248,0.3); }}
+  .news-card {{ background: var(--card-bg); border: 1px solid var(--line); border-radius: 24px; padding: 22px 26px; margin-bottom: 12px; box-shadow: 0 8px 30px rgba(61,36,15,0.04); transition: background 0.2s, border-color 0.2s, transform 0.2s; }}
+  .news-card:hover {{ transform: translateY(-2px); box-shadow: 0 12px 40px rgba(61,36,15,0.08); }}
   .news-card.featured {{ border-left: 3px solid var(--accent); }}
   .news-card.featured:hover {{ border-color: var(--accent); }}
   .card-header {{ display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }}
-  .rank-badge {{ background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; font-weight: 700; font-size: 12px; padding: 2px 8px; border-radius: 6px; }}
+  .rank-badge {{ background: var(--accent); color: #fff7f0; font-weight: 700; font-size: 12px; padding: 2px 8px; border-radius: 6px; }}
   .emoji-icon {{ font-size: 18px; }}
   .card-header-row {{ display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }}
   .emoji-sm {{ font-size: 14px; }}
-  .news-card h3 {{ font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 8px; line-height: 1.5; }}
+  .news-card h3 {{ font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 8px; line-height: 1.5; }}
   .journal-source {{ font-size: 12px; color: var(--accent); margin-bottom: 8px; opacity: 0.8; }}
   .news-card p {{ font-size: 13.5px; line-height: 1.75; color: var(--muted); }}
   .card-footer {{ margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }}
-  .tag {{ padding: 2px 9px; background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.2); border-radius: 999px; font-size: 11px; color: var(--accent); }}
-  .news-card a {{ font-size: 12px; color: var(--accent); text-decoration: none; opacity: 0.7; margin-left: auto; transition: opacity 0.2s; }}
+  .tag {{ padding: 2px 9px; background: var(--accent-soft); border-radius: 999px; font-size: 11px; color: var(--accent); }}
+  .news-card a {{ font-size: 12px; color: var(--accent); text-decoration: none; opacity: 0.7; margin-left: auto; }}
   .news-card a:hover {{ opacity: 1; }}
-  .utility-high {{ color: #4ade80; font-size: 11px; font-weight: 600; padding: 2px 8px; background: rgba(74,222,128,0.1); border-radius: 4px; }}
-  .utility-mid {{ color: #fbbf24; font-size: 11px; font-weight: 600; padding: 2px 8px; background: rgba(251,191,36,0.1); border-radius: 4px; }}
-  .utility-low {{ color: var(--muted); font-size: 11px; font-weight: 600; padding: 2px 8px; background: rgba(148,163,184,0.08); border-radius: 4px; }}
+  .utility-high {{ color: #5a7a3a; font-size: 11px; font-weight: 600; padding: 2px 8px; background: rgba(90,122,58,0.1); border-radius: 4px; }}
+  .utility-mid {{ color: #9f7a2e; font-size: 11px; font-weight: 600; padding: 2px 8px; background: rgba(159,122,46,0.1); border-radius: 4px; }}
+  .utility-low {{ color: var(--muted); font-size: 11px; font-weight: 600; padding: 2px 8px; background: rgba(118,100,83,0.08); border-radius: 4px; }}
   .utility-sm {{ font-size: 10px; }}
-  .pico-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; padding: 12px; background: rgba(17,24,39,0.8); border-radius: 14px; border: 1px solid var(--line); }}
+  .pico-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; padding: 12px; background: rgba(255,253,249,0.8); border-radius: 14px; border: 1px solid var(--line); }}
   .pico-item {{ display: flex; gap: 8px; align-items: baseline; }}
-  .pico-label {{ font-size: 10px; font-weight: 700; color: #fff; background: linear-gradient(135deg, var(--accent), var(--accent2)); padding: 2px 6px; border-radius: 4px; flex-shrink: 0; }}
+  .pico-label {{ font-size: 10px; font-weight: 700; color: #fff7f0; background: var(--accent); padding: 2px 6px; border-radius: 4px; flex-shrink: 0; }}
   .pico-text {{ font-size: 12px; color: var(--muted); line-height: 1.4; }}
   .keywords-section {{ margin-bottom: 36px; }}
   .keywords {{ display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }}
-  .keyword {{ padding: 5px 14px; background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.2); border-radius: 20px; font-size: 12px; color: var(--accent); cursor: default; transition: background 0.2s; }}
-  .keyword:hover {{ background: rgba(56,189,248,0.18); }}
+  .keyword {{ padding: 5px 14px; background: var(--accent-soft); border: 1px solid var(--line); border-radius: 20px; font-size: 12px; color: var(--accent); cursor: default; transition: background 0.2s; }}
+  .keyword:hover {{ background: rgba(140,79,43,0.18); }}
   .topic-section {{ margin-bottom: 36px; }}
   .topic-row {{ display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }}
   .topic-name {{ font-size: 13px; color: var(--muted); width: 100px; flex-shrink: 0; text-align: right; }}
   .topic-bar-bg {{ flex: 1; height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; }}
-  .topic-bar {{ height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 4px; transition: width 0.6s ease; }}
+  .topic-bar {{ height: 100%; background: linear-gradient(90deg, var(--accent), #c47a4a); border-radius: 4px; transition: width 0.6s ease; }}
   .topic-count {{ font-size: 12px; color: var(--accent); width: 24px; }}
   .clinic-banner {{ margin-top: 48px; animation: fadeUp 0.5s ease 0.4s both; }}
-  .clinic-link {{ display: flex; align-items: center; gap: 14px; padding: 20px 26px; background: linear-gradient(135deg, rgba(56,189,248,0.08), rgba(129,140,248,0.08)); border: 1px solid rgba(56,189,248,0.25); border-radius: 24px; text-decoration: none; color: var(--text); transition: all 0.3s; box-shadow: 0 8px 30px rgba(0,0,0,0.2); }}
-  .clinic-link:hover {{ border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(56,189,248,0.15); }}
-  .clinic-icon {{ font-size: 32px; flex-shrink: 0; }}
-  .clinic-info {{ flex: 1; }}
-  .clinic-name {{ font-size: 16px; font-weight: 700; color: #fff; }}
-  .clinic-desc {{ font-size: 12px; color: var(--muted); margin-top: 4px; }}
-  .clinic-arrow {{ font-size: 20px; color: var(--accent); font-weight: 700; }}
+  .clinic-link {{ display: flex; align-items: center; gap: 14px; padding: 18px 24px; background: var(--card-bg); border: 1px solid var(--line); border-radius: 24px; text-decoration: none; color: var(--text); transition: all 0.2s; box-shadow: 0 8px 30px rgba(61,36,15,0.04); }}
+  .clinic-link:hover {{ border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(61,36,15,0.08); }}
+  .clinic-icon {{ font-size: 28px; flex-shrink: 0; }}
+  .clinic-name {{ font-size: 15px; font-weight: 700; color: var(--text); flex: 1; }}
+  .clinic-arrow {{ font-size: 18px; color: var(--accent); font-weight: 700; }}
   footer {{ margin-top: 32px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 11.5px; color: var(--muted); display: flex; justify-content: space-between; animation: fadeUp 0.5s ease 0.5s both; }}
-  footer a {{ color: var(--muted); text-decoration: none; transition: color 0.2s; }}
+  footer a {{ color: var(--muted); text-decoration: none; }}
   footer a:hover {{ color: var(--accent); }}
   @keyframes fadeDown {{ from {{ opacity: 0; transform: translateY(-16px); }} to {{ opacity: 1; transform: translateY(0); }} }}
   @keyframes fadeUp {{ from {{ opacity: 0; transform: translateY(16px); }} to {{ opacity: 1; transform: translateY(0); }} }}
@@ -356,7 +352,7 @@ def generate_html(analysis: dict) -> str:
 <body>
 <div class="container">
   <header>
-    <div class="logo">⚡</div>
+    <div class="logo">🧠</div>
     <div class="header-text">
       <h1>rTMS Brain &middot; 重複經顱磁刺激文獻日報</h1>
       <div class="header-meta">
@@ -383,10 +379,7 @@ def generate_html(analysis: dict) -> str:
   <div class="clinic-banner">
     <a href="https://www.leepsyclinic.com/" class="clinic-link" target="_blank">
       <span class="clinic-icon">🏥</span>
-      <div class="clinic-info">
-        <div class="clinic-name">李政洋身心診所</div>
-        <div class="clinic-desc">專業 rTMS 重複經顱磁刺激治療 · 點此了解更多</div>
-      </div>
+      <span class="clinic-name">李政洋身心診所首頁</span>
       <span class="clinic-arrow">→</span>
     </a>
   </div>
