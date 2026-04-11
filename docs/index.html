@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>rTMS Brain · 重複經顱磁刺激文獻日報</title>
+<style>
+  :root { --bg: #0a0e1a; --surface: #111827; --line: #1e293b; --text: #e2e8f0; --muted: #94a3b8; --accent: #38bdf8; --accent2: #818cf8; --accent-soft: rgba(56,189,248,0.12); }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: "Noto Sans TC", "PingFang TC", "Helvetica Neue", Arial, sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+  body::before { content: ''; position: fixed; top: -40%; left: -20%; width: 80%; height: 80%; background: radial-gradient(circle, rgba(56,189,248,0.06) 0%, transparent 70%); pointer-events: none; }
+  .container { position: relative; z-index: 1; max-width: 640px; width: 100%; padding: 80px 24px; text-align: center; }
+  .logo { font-size: 64px; margin-bottom: 20px; }
+  h1 { font-size: 28px; color: #fff; margin-bottom: 12px; }
+  .subtitle { color: var(--accent); font-size: 16px; margin-bottom: 32px; }
+  .info { color: var(--muted); font-size: 14px; line-height: 1.8; margin-bottom: 40px; }
+  .clinic-banner { margin-top: 48px; }
+  .clinic-link { display: inline-flex; align-items: center; gap: 14px; padding: 18px 28px; background: linear-gradient(135deg, rgba(56,189,248,0.08), rgba(129,140,248,0.08)); border: 1px solid rgba(56,189,248,0.25); border-radius: 16px; text-decoration: none; color: var(--text); transition: all 0.3s; }
+  .clinic-link:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .clinic-icon { font-size: 28px; }
+  .clinic-name { font-size: 16px; font-weight: 700; color: #fff; }
+  .clinic-arrow { font-size: 18px; color: var(--accent); font-weight: 700; }
+  footer { margin-top: 56px; font-size: 12px; color: var(--muted); }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="logo">⚡</div>
+  <h1>rTMS Brain</h1>
+  <p class="subtitle">重複經顱磁刺激文獻日報 · 每日自動更新</p>
+  <p class="info">每日台北時間 04:00 自動從 PubMed 抓取最新 rTMS 文獻<br/>透過 Zhipu AI 進行摘要、分類與 PICO 分析<br/>首份報告即將生成，請明天查看</p>
+  <div class="clinic-banner">
+    <a href="https://www.leepsyclinic.com/" class="clinic-link" target="_blank">
+      <span class="clinic-icon">🏥</span>
+      <span class="clinic-name">李政洋身心診所</span>
+      <span class="clinic-arrow">→</span>
+    </a>
+  </div>
+  <footer>
+    <p>Powered by PubMed + Zhipu AI · <a href="https://github.com/u8901006/rTMS-brain">GitHub</a></p>
+  </footer>
+</div>
+</body>
+</html>
