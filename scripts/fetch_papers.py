@@ -6,6 +6,7 @@ Targets neuromodulation / brain stimulation journals and rTMS-related disease ke
 
 import json
 import sys
+import os
 import argparse
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone, timedelta
@@ -173,6 +174,28 @@ def fetch_details(pmids: list[str]) -> list[dict]:
     return papers
 
 
+def load_exclude_pmids(path: str) -> set[str]:
+    if not path or not os.path.exists(path):
+        return set()
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        tz_taipei = timezone(timedelta(hours=8))
+        cutoff = (datetime.now(tz_taipei) - timedelta(days=7)).strftime("%Y-%m-%d")
+        pmids = set()
+        for entry in data:
+            if entry.get("date", "") >= cutoff:
+                pmids.update(entry.get("pmids", []))
+        print(
+            f"[INFO] Excluding {len(pmids)} previously reported PMIDs (last 7 days)",
+            file=sys.stderr,
+        )
+        return pmids
+    except Exception as e:
+        print(f"[WARN] Could not load exclude list: {e}", file=sys.stderr)
+        return set()
+
+
 def main():
     parser = argparse.ArgumentParser(description="Fetch rTMS papers from PubMed")
     parser.add_argument("--days", type=int, default=7, help="Lookback days")
@@ -181,7 +204,12 @@ def main():
     )
     parser.add_argument("--output", default="-", help="Output file (- for stdout)")
     parser.add_argument("--json", action="store_true", help="Output as JSON")
+    parser.add_argument(
+        "--exclude-pmids", default="", help="JSON file with previously reported PMIDs"
+    )
     args = parser.parse_args()
+
+    exclude = load_exclude_pmids(args.exclude_pmids)
 
     query = build_query(days=args.days)
     print(
@@ -212,6 +240,15 @@ def main():
 
     papers = fetch_details(pmids)
     print(f"[INFO] Fetched details for {len(papers)} papers", file=sys.stderr)
+
+    if exclude:
+        before = len(papers)
+        papers = [p for p in papers if p["pmid"] not in exclude]
+        skipped = before - len(papers)
+        print(
+            f"[INFO] Filtered out {skipped} already-reported papers, {len(papers)} new",
+            file=sys.stderr,
+        )
 
     output_data = {
         "date": datetime.now(timezone(timedelta(hours=8))).strftime("%Y-%m-%d"),

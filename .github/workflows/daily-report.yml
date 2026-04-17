@@ -50,13 +50,20 @@ jobs:
           fi
           echo "Date: $(cat $GITHUB_OUTPUT | grep target | cut -d= -f2)"
 
+      - name: Ensure reported_pmids.json exists
+        run: |
+          if [ ! -f reported_pmids.json ]; then
+            echo '[]' > reported_pmids.json
+          fi
+
       - name: Fetch rTMS papers from PubMed
         run: |
           python scripts/fetch_papers.py \
             --days 7 \
             --max-papers 40 \
             --json \
-            --output papers.json
+            --output papers.json \
+            --exclude-pmids reported_pmids.json
         continue-on-error: true
 
       - name: Check papers data
@@ -81,6 +88,31 @@ jobs:
             --output docs/rtms-${{ steps.date.outputs.target }}.html \
             --api-key "$ZHIPU_API_KEY"
 
+      - name: Update reported PMIDs
+        run: |
+          python -c "
+          import json
+          from datetime import datetime, timezone, timedelta
+
+          with open('papers.json','r',encoding='utf-8') as f:
+              data = json.load(f)
+          with open('reported_pmids.json','r',encoding='utf-8') as f:
+              reported = json.load(f)
+
+          tz = timezone(timedelta(hours=8))
+          today = datetime.now(tz).strftime('%Y-%m-%d')
+          new_pmids = [p['pmid'] for p in data.get('papers',[]) if p.get('pmid')]
+          if new_pmids:
+              reported.append({'date': today, 'pmids': new_pmids})
+
+          cutoff = (datetime.now(tz) - timedelta(days=7)).strftime('%Y-%m-%d')
+          reported = [e for e in reported if e.get('date','') >= cutoff]
+
+          with open('reported_pmids.json','w',encoding='utf-8') as f:
+              json.dump(reported, f, ensure_ascii=False, indent=2)
+          print(f'Updated reported_pmids.json: {len(reported)} entries, {sum(len(e.get(\"pmids\",[])) for e in reported)} total PMIDs tracked')
+          "
+
       - name: Generate index page
         run: python scripts/generate_index.py
 
@@ -88,7 +120,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/
+          git add docs/ reported_pmids.json
           git diff --cached --quiet && echo "No changes to commit" && exit 0
           git commit -m "rTMS daily report: ${{ steps.date.outputs.target }}"
           git pull --rebase origin main
