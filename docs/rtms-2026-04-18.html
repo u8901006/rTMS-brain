@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>rTMS Brain &middot; 重複經顱磁刺激文獻日報 &middot; 2026年4月18日</title>
+<meta name="description" content="2026年4月18日 rTMS 重複經顱磁刺激文獻日報，由 AI 自動彙整 PubMed 最新論文"/>
+<style>
+  :root { --bg: #f6f1e8; --surface: #fffaf2; --line: #d8c5ab; --text: #2b2118; --muted: #766453; --accent: #8c4f2b; --accent-soft: #ead2bf; --card-bg: color-mix(in srgb, var(--surface) 92%, white); }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: radial-gradient(circle at top, #fff6ea 0, var(--bg) 55%, #ead8c6 100%); color: var(--text); font-family: "Noto Sans TC", "PingFang TC", "Helvetica Neue", Arial, sans-serif; min-height: 100vh; overflow-x: hidden; }
+  .container { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding: 60px 32px 80px; }
+  header { display: flex; align-items: center; gap: 16px; margin-bottom: 52px; animation: fadeDown 0.6s ease both; }
+  .logo { width: 48px; height: 48px; border-radius: 14px; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; box-shadow: 0 4px 20px rgba(140,79,43,0.25); }
+  .header-text h1 { font-size: 22px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
+  .header-meta { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; align-items: center; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; letter-spacing: 0.3px; }
+  .badge-date { background: var(--accent-soft); border: 1px solid var(--line); color: var(--accent); }
+  .badge-count { background: rgba(140,79,43,0.06); border: 1px solid var(--line); color: var(--muted); }
+  .badge-source { background: transparent; color: var(--muted); font-size: 11px; padding: 0 4px; }
+  .summary-card { background: var(--card-bg); border: 1px solid var(--line); border-radius: 24px; padding: 28px 32px; margin-bottom: 32px; box-shadow: 0 20px 60px rgba(61,36,15,0.06); animation: fadeUp 0.5s ease 0.1s both; }
+  .summary-card h2 { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.6px; color: var(--accent); margin-bottom: 16px; }
+  .summary-text { font-size: 15px; line-height: 1.8; color: var(--text); }
+  .section { margin-bottom: 36px; animation: fadeUp 0.5s ease both; }
+  .section-title { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .section-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; background: var(--accent-soft); }
+  .news-card { background: var(--card-bg); border: 1px solid var(--line); border-radius: 24px; padding: 22px 26px; margin-bottom: 12px; box-shadow: 0 8px 30px rgba(61,36,15,0.04); transition: background 0.2s, border-color 0.2s, transform 0.2s; }
+  .news-card:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(61,36,15,0.08); }
+  .news-card.featured { border-left: 3px solid var(--accent); }
+  .news-card.featured:hover { border-color: var(--accent); }
+  .card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .rank-badge { background: var(--accent); color: #fff7f0; font-weight: 700; font-size: 12px; padding: 2px 8px; border-radius: 6px; }
+  .emoji-icon { font-size: 18px; }
+  .card-header-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .emoji-sm { font-size: 14px; }
+  .news-card h3 { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 8px; line-height: 1.5; }
+  .journal-source { font-size: 12px; color: var(--accent); margin-bottom: 8px; opacity: 0.8; }
+  .news-card p { font-size: 13.5px; line-height: 1.75; color: var(--muted); }
+  .card-footer { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .tag { padding: 2px 9px; background: var(--accent-soft); border-radius: 999px; font-size: 11px; color: var(--accent); }
+  .news-card a { font-size: 12px; color: var(--accent); text-decoration: none; opacity: 0.7; margin-left: auto; }
+  .news-card a:hover { opacity: 1; }
+  .utility-high { color: #5a7a3a; font-size: 11px; font-weight: 600; padding: 2px 8px; background: rgba(90,122,58,0.1); border-radius: 4px; }
+  .utility-mid { color: #9f7a2e; font-size: 11px; font-weight: 600; padding: 2px 8px; background: rgba(159,122,46,0.1); border-radius: 4px; }
+  .utility-low { color: var(--muted); font-size: 11px; font-weight: 600; padding: 2px 8px; background: rgba(118,100,83,0.08); border-radius: 4px; }
+  .utility-sm { font-size: 10px; }
+  .pico-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; padding: 12px; background: rgba(255,253,249,0.8); border-radius: 14px; border: 1px solid var(--line); }
+  .pico-item { display: flex; gap: 8px; align-items: baseline; }
+  .pico-label { font-size: 10px; font-weight: 700; color: #fff7f0; background: var(--accent); padding: 2px 6px; border-radius: 4px; flex-shrink: 0; }
+  .pico-text { font-size: 12px; color: var(--muted); line-height: 1.4; }
+  .keywords-section { margin-bottom: 36px; }
+  .keywords { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .keyword { padding: 5px 14px; background: var(--accent-soft); border: 1px solid var(--line); border-radius: 20px; font-size: 12px; color: var(--accent); cursor: default; transition: background 0.2s; }
+  .keyword:hover { background: rgba(140,79,43,0.18); }
+  .topic-section { margin-bottom: 36px; }
+  .topic-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .topic-name { font-size: 13px; color: var(--muted); width: 100px; flex-shrink: 0; text-align: right; }
+  .topic-bar-bg { flex: 1; height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; }
+  .topic-bar { height: 100%; background: linear-gradient(90deg, var(--accent), #c47a4a); border-radius: 4px; transition: width 0.6s ease; }
+  .topic-count { font-size: 12px; color: var(--accent); width: 24px; }
+  .clinic-banner { margin-top: 48px; animation: fadeUp 0.5s ease 0.4s both; }
+  .clinic-link { display: flex; align-items: center; gap: 14px; padding: 18px 24px; background: var(--card-bg); border: 1px solid var(--line); border-radius: 24px; text-decoration: none; color: var(--text); transition: all 0.2s; box-shadow: 0 8px 30px rgba(61,36,15,0.04); }
+  .clinic-link:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(61,36,15,0.08); }
+  .clinic-icon { font-size: 28px; flex-shrink: 0; }
+  .clinic-name { font-size: 15px; font-weight: 700; color: var(--text); flex: 1; }
+  .clinic-arrow { font-size: 18px; color: var(--accent); font-weight: 700; }
+  footer { margin-top: 32px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 11.5px; color: var(--muted); display: flex; justify-content: space-between; animation: fadeUp 0.5s ease 0.5s both; }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 600px) { .container { padding: 36px 18px 60px; } .summary-card, .news-card { padding: 20px 18px; } .pico-grid { grid-template-columns: 1fr; } footer { flex-direction: column; gap: 6px; text-align: center; } .topic-name { width: 70px; font-size: 11px; } }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="logo">🧠</div>
+    <div class="header-text">
+      <h1>rTMS Brain &middot; 重複經顱磁刺激文獻日報</h1>
+      <div class="header-meta">
+        <span class="badge badge-date">📅 2026年4月18日</span>
+        <span class="badge badge-count">📊 38 篇文獻</span>
+        <span class="badge badge-source">Powered by PubMed + Zhipu AI</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="summary-card">
+    <h2>📋 今日 rTMS 文獻趨勢</h2>
+    <p class="summary-text">今日文獻主要聚焦於rTMS在憂鬱症、中風復健和慢性疼痛的應用，其中多項研究探討了iTBS的臨床效果和神經機制，同時有新研究發現預治療TMS誘導的皮質反應可作為慢性疼痛治療反應的生物標記物。</p>
+  </div>
+
+  <div class='section'><div class='section-title'><span class='section-icon'>⭐</span>今日精選 TOP Picks</div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#1</span>
+            <span class="emoji-icon">🧠</span>
+            <span class="utility-high">高實用性</span>
+          </div>
+          <h3>rTMS和iTBS對阿茲海默病患者腦電圖微狀態的差異調節與臨床改善相關</h3>
+          <p class="journal-source">Brain research &middot; Differential modulation of EEG microstate spatiotemporal dynamics by rTMS and iTBS correlates with clinical improvement in Alzheimer's disease</p>
+          <p>研究發現rTMS主要誘導MS-B持續抑制，而iTBS則早期增加MS-C活性，臨床改善與MS-C增加和MS-B減少相關，揭示了不同刺激協議的差異性神經機制。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">28名阿茲海默病患者</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">rTMS或iTBS治療</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">不同刺激協議的比較</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">腦電圖微狀態的變化與臨床症狀改善的相關性</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">認知功能</span><span class="tag">神經調控技術</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41990984/" target="_blank">閱讀原文 →</a>
+          </div>
+        </div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#2</span>
+            <span class="emoji-icon">💉</span>
+            <span class="utility-high">高實用性</span>
+          </div>
+          <h3>預治療TMS誘導的皮質反應和alpha波段振蕩動力學預測慢性疼痛對運動皮質神經調治療的反應</h3>
+          <p class="journal-source">NeuroImage &middot; Lower pre-treatment TMS-evoked cortical reactivity and alpha-band oscillatory dynamics predict efficacy of primary motor cortex neuromodulation for chronic pain</p>
+          <p>研究發現預治療時較低的TMS誘導皮質反應和alpha波段振蕩動力學可預測慢性疼痛患者對rTMS治療的反應，機器學習模型預測效果良好。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">43名慢性疼痛患者</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">運動皮質10Hz rTMS治療</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">反應者vs非反應者</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">預治療TMS-EEG特徵與疼痛減輕程度的相關性</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">慢性疼痛</span><span class="tag">神經調控技術</span><span class="tag">TMS參數最佳化</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41990897/" target="_blank">閱讀原文 →</a>
+          </div>
+        </div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#3</span>
+            <span class="emoji-icon">⚡</span>
+            <span class="utility-high">高實用性</span>
+          </div>
+          <h3>從前額葉10Hz重複經顱磁刺激過渡到間斷性theta-burst刺激治療憂鬱症成人：真實世界數據回顯性比較</h3>
+          <p class="journal-source">Neuromodulation : journal of the International Neuromodulation Society &middot; Moving From Prefrontal 10-Hz Repetitive Transcranial Magnetic Stimulation to Intermittent Theta-Burst Stimulation in Adults With Depression: Retrospective Comparison of Naturalistic Data</p>
+          <p>真實世界數據顯示10Hz和iTBS在憂鬱症治療中具有可比較的臨床效果，兩種協議的緩解率分別為33%和40%，應答率分別為28%和37%。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">207名接受rTMS治療的憂鬱症患者</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">10Hz rTMS或iTBS治療</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">不同刺激協議的比較</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">憂鬱症症狀改善和緩解率</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">憂鬱症</span><span class="tag">神經調控技術</span><span class="tag">TMS參數最佳化</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41979557/" target="_blank">閱讀原文 →</a>
+          </div>
+        </div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#4</span>
+            <span class="emoji-icon">🎯</span>
+            <span class="utility-high">高實用性</span>
+          </div>
+          <h3>病灶網絡導航的連續theta-burst刺激治療急性缺血性中風運動功能恢復的隨機雙盲對照多中心II期試驗</h3>
+          <p class="journal-source">Stroke and vascular neurology &middot; Lesion network mapping navigated continuous theta burst stimulation for motor recovery in acute ischaemic stroke (MASTRE): rationale and design of a randomised double-blind controlled multicentre phase 2 trial</p>
+          <p>引入創新方法使用病灶網絡映射(LNM)識別個體化刺激目標，通過實時神經導航精確調節受損的感覺運動網絡，以優化cTBS治療效果。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">急性缺血性中風患者</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">LNM引導的cTBS治療</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">虛假刺激</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">Fugl-Meyer運動評分變化</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">中風復健</span><span class="tag">神經調控技術</span><span class="tag">神經影像導航</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41974577/" target="_blank">閱讀原文 →</a>
+          </div>
+        </div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#5</span>
+            <span class="emoji-icon">🧩</span>
+            <span class="utility-high">高實用性</span>
+          </div>
+          <h3>加速間斷性theta-burst刺激針對個體化前頂葉控制網絡改善自閉症譜系核心症狀：雙盲隨機對照試驗</h3>
+          <p class="journal-source">Molecular psychiatry &middot; Accelerated intermittent theta burst stimulation targeting personalized fronto-parietal control network improves core symptoms of autism spectrum disorder: a double-blind, randomized controlled trial</p>
+          <p>加速iTBS靶向個體化前頂葉控制網絡(FPN)治療重度自閉症譜系障礙(ASD)顯著提高治療反應率(55% vs 29%)，且安全耐受性良好。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">67名6-30歲ASD患者</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">靶向FPN的加速iTBS治療</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">虛假刺激</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">ADOS-2 SA評分反應率</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span><span class="tag">認知功能</span><span class="tag">TMS參數最佳化</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41986743/" target="_blank">閱讀原文 →</a>
+          </div>
+        </div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#6</span>
+            <span class="emoji-icon">📈</span>
+            <span class="utility-mid">中實用性</span>
+          </div>
+          <h3>急性前額葉血流對間斷性theta-burst刺激的反應與當前憂鬱症和發作復發相關：橫斷面研究</h3>
+          <p class="journal-source">Psychiatry and clinical neurosciences &middot; Acute prefrontal hemodynamic responses to intermittent theta burst stimulation correlate with current depression and episode recurrence: A cross-sectional study</p>
+          <p>前額葉皮質刺激後的氧合血紅蛋白濃度增加與當前憂鬱症狀相關，且在緩解期患者中與多次發作史相關，可能有助於鑑別診斷和憂鬱症脆弱性評估。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">121名成人(39名當前MDD，41名緩解期MDD，41名健康對照)</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">左側背外側前額葉皮質的單次iTBS</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">各組間比較</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">刺激後腦血動力學反應和功能連接變化</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">憂鬱症</span><span class="tag">神經調控技術</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41982072/" target="_blank">閱讀原文 →</a>
+          </div>
+        </div></div>
+
+  <div class='section'><div class='section-title'><span class='section-icon'>📚</span>其他值得關注的文獻</div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🗣️</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>透過神經調控和手勢觀察上調動作語義以促進失語症中的動詞提取</h3>
+          <p class="journal-source">bioRxiv : the preprint server for biology</p>
+          <p>研究顯示結合手勢預刺激和後中顳葉皮質刺激不會比單獨干預產生額外效益，反而可能相互減弱效果。</p>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span><span class="tag">認知功能</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41993299/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">👶</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>新生兒大腦皮質腦回和腦溝的結構功能分化與耦合</h3>
+          <p class="journal-source">Human brain mapping</p>
+          <p>研究揭示了新生兒腦回和腦溝在功能連接和結構連接上的差異，以及其結構-功能耦合的發育變化。</p>
+          <div class="card-footer">
+            <span class="tag">神經影像導航</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41992829/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🏃</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>Cybathlon十年的影響：對公眾可見性、科學傳播和技術轉移的影響</h3>
+          <p class="journal-source">Journal of neuroengineering and rehabilitation</p>
+          <p>分析Cybathlon十年來對公眾可見性、科學傳播和技術轉移的影響。</p>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41992346/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🦿</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>使用雙倒擺方法建模和驗證拐杖支撐外骨骼步態</h3>
+          <p class="journal-source">Journal of neuroengineering and rehabilitation</p>
+          <p>研究拐杖支撐外骨骼步態的雙倒擺建模和驗證方法。</p>
+          <div class="card-footer">
+            <span class="tag">中風復健</span><span class="tag">神經調控技術</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41992327/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🦵</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>走向更直觀的假肢控制：脛截肢患者結構性殘留肌肉訓練</h3>
+          <p class="journal-source">Journal of neuroengineering and rehabilitation</p>
+          <p>研究殘留肌肉結構性訓練對脛截肢患者假肢控制的影響。</p>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41992246/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🔍</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>卒中後患者本體感覺測量的重測信度和收斂區分效度</h3>
+          <p class="journal-source">Archives of physical medicine and rehabilitation</p>
+          <p>研究顯示使用圖像捕獲技術的被動運動檢測閾值(TDPM)和關節位置感覺(JPS)測量在卒中後患者中具有良好的信度和效度。</p>
+          <div class="card-footer">
+            <span class="tag">中風復健</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41990933/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🧠</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>小腦信號在癲癇患者MEG和EEG中的檢測量化：使用解剖學資訊源建模</h3>
+          <p class="journal-source">NeuroImage</p>
+          <p>研究使用解剖學資訊源建模量化癲癇患者中小腦信號在MEG和EEG中的檢測性，評估了不同配置的OPM效果。</p>
+          <div class="card-footer">
+            <span class="tag">癫痫</span><span class="tag">神經影像導航</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41990896/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">😴</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>失眠的神經分子標記：來自有符號差映射和基因表達分析的見解</h3>
+          <p class="journal-source">NeuroImage</p>
+          <p>研究整合神經影像發現和基因表達數據，揭示了失眠的神經分子標記，特別是右額下回功能低下。</p>
+          <div class="card-footer">
+            <span class="tag">失眠</span><span class="tag">神經調控技術</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41990895/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">💭</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>沉思相關腦結構和功能異常的網絡定位</h3>
+          <p class="journal-source">NeuroImage</p>
+          <p>系統性研究沉思相關的腦結構和功能異常，建立了沉思網絡的整合框架。</p>
+          <div class="card-footer">
+            <span class="tag">憂鬱症</span><span class="tag">神經調控技術</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41990894/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🧬</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>主要Tau蛋白病小鼠模型中SV2A表達的動態區域差異：縱向多示蹤PET研究</h3>
+          <p class="journal-source">NeuroImage</p>
+          <p>研究使用[18F]UCB-H PET追蹤小鼠模型中SV2A表達的階段性區域變化，揭示tau病理與突�密度改變的關聯。</p>
+          <div class="card-footer">
+            <span class="tag">認知功能</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41990893/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🏃‍♂️</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>長期運動與執行控制網絡中有效連接的差異模式相關：與認知靈活性的關係</h3>
+          <p class="journal-source">NeuroImage</p>
+          <p>研究發現長期運動通過優化任務相關定向信息流來維護認知靈活性，保持高效通路同時減少補償通路。</p>
+          <div class="card-footer">
+            <span class="tag">認知功能</span><span class="tag">神經調控技術</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41990892/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">📡</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>同時OPM-MEG和EEG測量的柔性頭罩特徵</h3>
+          <p class="journal-source">Journal of neural engineering</p>
+          <p>研究開發了一種柔性頭罩，可實現完全集成的同時OPM-MEG和EEG測量，不會降低信號質量。</p>
+          <div class="card-footer">
+            <span class="tag">神經影像導航</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41990836/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">⚡</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>杏仁核-海馬體beta同步的波動分析顯示顳葉癲癇相關憂鬱中的網絡剛性</h3>
+          <p class="journal-source">Journal of neural engineering</p>
+          <p>研究發現顳葉癲癇伴憂鬱症患者顯示杏仁核-海馬體beta同步的時間持久性更高，與憂鬱症嚴重程度相關。</p>
+          <div class="card-footer">
+            <span class="tag">癫痫</span><span class="tag">憂鬱症</span><span class="tag">神經調控技術</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41990834/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🧠</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>Kalman相位轉移熵：增強腦機接口解碼的信息測量新方法</h3>
+          <p class="journal-source">Journal of neural engineering</p>
+          <p>研究提出Kalman時間相位轉移熵方法，可有效整合信號幅度和相位信息，提高腦機接口解碼效果。</p>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41990825/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">💬</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>通訊BCI中疲勞和性能測量與用戶界面和任務相關</h3>
+          <p class="journal-source">Journal of neural engineering</p>
+          <p>研究比較兩種非植入式通訊BCI，發現校準任務比複製拼寫任務更易導致疲勞和精神努力增加。</p>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41990822/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">💰</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>香港難治性憂鬱症患者中esketamine與替代治療策略的成本效益分析：多臂建模研究</h3>
+          <p class="journal-source">PLoS medicine</p>
+          <p>研究比較esketamine與多種替代治療策略的成本效益，發現聯合療法是最具成本效益的策略。</p>
+          <div class="card-footer">
+            <span class="tag">憂鬱症</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41990095/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">📊</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>使用增強熵特徵的EEG複雜性分析用於憂鬱檢測和嚴重程度分類</h3>
+          <p class="journal-source">Journal of neuroengineering and rehabilitation</p>
+          <p>研究使用增強熵特徵進行EEG複雜性分析，用於憂鬱檢測和嚴重程度分類。</p>
+          <div class="card-footer">
+            <span class="tag">憂鬱症</span><span class="tag">神經調控技術</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41987280/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🎮</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>脊髓損傷四肢癱患者對遊戲化肌電生物反饒的初步研究：結果令人愉悅，高劑量治療，增加肌肉電活動，可能改善手臂功能</h3>
+          <p class="journal-source">Journal of neuroengineering and rehabilitation</p>
+          <p>研究評估了遊戲化肌電生物反饒對脊髓損傷四肢癱患者的效果，發現其可增加肌肉電活動並可能改善手臂功能。</p>
+          <div class="card-footer">
+            <span class="tag">中風復健</span><span class="tag">神經調控技術</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41987182/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🔗</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>脊髓損傷後功能修復的橋樑：臨床可及神經調控、神經復健和生物標記的新方向</h3>
+          <p class="journal-source">Neurorehabilitation and neural repair</p>
+          <p>研究探討如何整合神經調控策略、預測措施和生物標記與密集的神經科學導向復健，改善脊髓損傷患者的功能結果。</p>
+          <div class="card-footer">
+            <span class="tag">中風復健</span><span class="tag">神經調控技術</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41986252/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🔌</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>腦機接口轉型技術：創新、應用與挑戰</h3>
+          <p class="journal-source">Brain connectivity</p>
+          <p>研究探討腦機接口轉型技術的創新、應用與挑戰。</p>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41986129/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🤰</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>懷孕改變大腦信號的變異性</h3>
+          <p class="journal-source">NeuroImage</p>
+          <p>研究發現懷孕改變了大腦活動的時間動力學，使神經變異性相對穩定，與控制組的減少軌跡不同。</p>
+          <div class="card-footer">
+            <span class="tag">神經可塑性</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41985852/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🩸</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>女性多發性硬化症患者生命階段激素的影響：一項調查研究：月經週期</h3>
+          <p class="journal-source">Archives of physical medicine and rehabilitation</p>
+          <p>研究顯示超過85%的美國女性多發性硬化症患者報告在月經週期的至少一個階段出現疾病症狀加劇或功能障礙。</p>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41985831/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">⚠️</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>跌傷預防策略量表(FIAS)量化跌倒相關保護性運動的量表驗證</h3>
+          <p class="journal-source">Archives of physical medicine and rehabilitation</p>
+          <p>研究驗證了跌傷預防策略量表(FIAS)在量化和識別老年人跌倒相關頭部撞擊風險方面的可靠性、有效性和診斷效用。</p>
+          <div class="card-footer">
+            <span class="tag">中風復健</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41985830/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🔊</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>將經顱脈衝刺激重新分類為TNUS：非線性機制需要脫離ITRUSST框架</h3>
+          <p class="journal-source">Brain stimulation</p>
+          <p>研究提出經顱非線性超聲波刺激(TNUS)框架，正式重新分類經顱脈衝刺激(TPS)，明確區分非線性波力學與準線性聲學。</p>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41985741/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">📐</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>延遲和定向耦合檢測的指標驗證</h3>
+          <p class="journal-source">Journal of neural engineering</p>
+          <p>研究比較了常用有效連接指標重建已知時間關係和網絡拓撲的能力，發現多變量轉移熵在多種條件下表現最佳。</p>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41985540/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">⚡</span>
+            <span class="utility-high utility-sm">高</span>
+          </div>
+          <h3>脊髓刺激改善疼痛性糖尿病神經病變患者的疼痛和生活質量：隨機試驗的Meta分析</h3>
+          <p class="journal-source">Neuromodulation : journal of the International Neuromodulation Society</p>
+          <p>研究發現脊髓刺激(SCS)可顯著改善疼痛性糖尿病神經病變患者的疼痛強度和生活質量，且未觀察到不良事件增加。</p>
+          <div class="card-footer">
+            <span class="tag">慢性疼痛</span><span class="tag">神經調控技術</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41984006/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🧲</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>改善經顱磁刺激體驗：經顱磁刺激參數和線圈設計如何影響體感覺知覺</h3>
+          <p class="journal-source">Neuromodulation : journal of the International Neuromodulation Society</p>
+          <p>研究系統地表徵了TMS誘發的感覺，發現刺激強度、位置和協議系統地影響感覺，新型線圈設計可減少不適感。</p>
+          <div class="card-footer">
+            <span class="tag">TMS參數最佳化</span><span class="tag">神經調控技術</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41984005/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">📋</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>青少年憂鬱症急性期間斷性theta-burst刺激的臨床效果：雙盲隨機對照試驗研究方案</h3>
+          <p class="journal-source">Trials</p>
+          <p>研究方案旨在探索iTBS在青少年急性憂鬱症中的臨床效果，評估臨床症狀和治療後最敏感的神經生理特徵。</p>
+          <div class="card-footer">
+            <span class="tag">憂鬱症</span><span class="tag">神經調控技術</span><span class="tag">TMS參數最佳化</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41975503/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🚶</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>改善2024 Cybathlon背景下基於EEG的移動腦機接口的運動想像解碼方法</h3>
+          <p class="journal-source">Journal of neuroengineering and rehabilitation</p>
+          <p>研究改善基於EEG的移動腦機接口的運動想像解碼方法，以適應2024 Cybathlon的實時使用需求。</p>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41975456/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🦶</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>腳背屈實時超聲成像視覺反饋的皮質映射：中風後患者fNIRS研究</h3>
+          <p class="journal-source">Journal of neuroengineering and rehabilitation</p>
+          <p>研究發現實時超聲成像視覺反饋(UVF)在中風後患者腳背屈任務中減少了PMC/SMA的ΔHbR，並降低了雙側DLPFC連接性。</p>
+          <div class="card-footer">
+            <span class="tag">中風復健</span><span class="tag">神經調控技術</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41975437/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">✋</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>重複經顱磁刺激在改善中風後患者精细運動功能中的作用：系統回顧和Meta分析</h3>
+          <p class="journal-source">BMC neurology</p>
+          <p>系統回顧和Meta分析評估重複經顱磁刺激在中風後患者精细運動功能改善中的作用。</p>
+          <div class="card-footer">
+            <span class="tag">中風復健</span><span class="tag">神經調控技術</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41975327/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">✋</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>非侵入性腦刺激改善中風後患者精细運動功能的作用：系統回顧和Meta分析</h3>
+          <p class="journal-source">BMC neurology</p>
+          <p>系統回顧和Meta分析評估非侵入性腦刺激改善中風後患者精细運動功能的作用。</p>
+          <div class="card-footer">
+            <span class="tag">中風復健</span><span class="tag">神經調控技術</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/41975327/" target="_blank">PubMed →</a>
+          </div>
+        </div></div>
+
+  <div class='topic-section section'><div class='section-title'><span class='section-icon'>📊</span>主題分佈</div>
+            <div class="topic-row">
+              <span class="topic-name">憂鬱症</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:27%"></div></div>
+              <span class="topic-count">5</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">慢性疼痛</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:16%"></div></div>
+              <span class="topic-count">3</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">中風復健</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:38%"></div></div>
+              <span class="topic-count">7</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">神經調控技術</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:100%"></div></div>
+              <span class="topic-count">18</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">TMS參數最佳化</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:22%"></div></div>
+              <span class="topic-count">4</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">神經影像導航</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:16%"></div></div>
+              <span class="topic-count">3</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">神經可塑性</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:11%"></div></div>
+              <span class="topic-count">2</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">認知功能</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:16%"></div></div>
+              <span class="topic-count">3</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">癫痫</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:5%"></div></div>
+              <span class="topic-count">1</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">失眠</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:5%"></div></div>
+              <span class="topic-count">1</span>
+            </div></div>
+
+  <div class='keywords-section section'><div class='section-title'><span class='section-icon'>🏷️</span>關鍵字</div><div class='keywords'><span class="keyword">rTMS</span><span class="keyword">iTBS</span><span class="keyword">憂鬱症</span><span class="keyword">慢性疼痛</span><span class="keyword">中風復健</span><span class="keyword">神經調控</span><span class="keyword">TMS參數最佳化</span><span class="keyword">神經影像導航</span><span class="keyword">神經可塑性</span><span class="keyword">認知功能</span></div></div>
+
+  <div class="clinic-banner">
+    <a href="https://www.leepsyclinic.com/" class="clinic-link" target="_blank">
+      <span class="clinic-icon">🏥</span>
+      <span class="clinic-name">李政洋身心診所首頁</span>
+      <span class="clinic-arrow">→</span>
+    </a>
+  </div>
+
+  <footer>
+    <span>資料來源：PubMed &middot; 分析模型：glm-5.1</span>
+    <span><a href="https://github.com/u8901006/rTMS-brain">GitHub</a></span>
+  </footer>
+</div>
+</body>
+</html>
