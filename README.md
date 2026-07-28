@@ -4,7 +4,7 @@
 
 ## 關於
 
-本計畫每日自動從 PubMed 抓取最新的 rTMS 相關文獻，透過 Zhipu AI（GLM-5.1）進行摘要、分類與 PICO 分析，生成精美的 HTML 日報頁面，部署於 GitHub Pages。
+本計畫每日自動從 PubMed 抓取最新的 rTMS 相關文獻，透過 NVIDIA NIM（主要模型：`nvidia/nemotron-3-super-120b-a12b`；備用模型：`nvidia/nemotron-3-nano-30b-a3b`）進行摘要、分類與 PICO 分析，生成精美的 HTML 日報頁面，部署於 GitHub Pages。
 
 ## 涵蓋範圍
 
@@ -21,7 +21,7 @@
 ```
 scripts/
   fetch_papers.py      # PubMed 文獻抓取
-  generate_report.py   # Zhipu AI 分析 + HTML 生成
+  generate_report.py   # NVIDIA NIM 分析 + HTML 生成
   generate_index.py    # 首頁索引生成
 .github/workflows/
   daily-report.yml     # GitHub Actions 每日排程
@@ -33,7 +33,7 @@ docs/
 ## 技術棧
 
 - PubMed E-utilities API（文獻來源）
-- Zhipu AI GLM-5.1（AI 分析）
+- NVIDIA NIM Nemotron 3（主要模型：`nvidia/nemotron-3-super-120b-a12b`；備用模型：`nvidia/nemotron-3-nano-30b-a3b`）
 - GitHub Actions（自動化排程，每日台北時間 04:00）
 - GitHub Pages（靜態網站部署）
 
