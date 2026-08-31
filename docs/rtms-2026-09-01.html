@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>rTMS Brain &middot; 重複經顱磁刺激文獻日報 &middot; 2026年9月1日</title>
+<meta name="description" content="2026年9月1日 rTMS 重複經顱磁刺激文獻日報，由 AI 自動彙整 PubMed 最新論文"/>
+<style>
+  :root { --bg: #f6f1e8; --surface: #fffaf2; --line: #d8c5ab; --text: #2b2118; --muted: #766453; --accent: #8c4f2b; --accent-soft: #ead2bf; --card-bg: color-mix(in srgb, var(--surface) 92%, white); }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: radial-gradient(circle at top, #fff6ea 0, var(--bg) 55%, #ead8c6 100%); color: var(--text); font-family: "Noto Sans TC", "PingFang TC", "Helvetica Neue", Arial, sans-serif; min-height: 100vh; overflow-x: hidden; }
+  .container { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding: 60px 32px 80px; }
+  header { display: flex; align-items: center; gap: 16px; margin-bottom: 52px; animation: fadeDown 0.6s ease both; }
+  .logo { width: 48px; height: 48px; border-radius: 14px; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; box-shadow: 0 4px 20px rgba(140,79,43,0.25); }
+  .header-text h1 { font-size: 22px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
+  .header-meta { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; align-items: center; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; letter-spacing: 0.3px; }
+  .badge-date { background: var(--accent-soft); border: 1px solid var(--line); color: var(--accent); }
+  .badge-count { background: rgba(140,79,43,0.06); border: 1px solid var(--line); color: var(--muted); }
+  .badge-source { background: transparent; color: var(--muted); font-size: 11px; padding: 0 4px; }
+  .summary-card { background: var(--card-bg); border: 1px solid var(--line); border-radius: 24px; padding: 28px 32px; margin-bottom: 32px; box-shadow: 0 20px 60px rgba(61,36,15,0.06); animation: fadeUp 0.5s ease 0.1s both; }
+  .summary-card h2 { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.6px; color: var(--accent); margin-bottom: 16px; }
+  .summary-text { font-size: 15px; line-height: 1.8; color: var(--text); }
+  .section { margin-bottom: 36px; animation: fadeUp 0.5s ease both; }
+  .section-title { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .section-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; background: var(--accent-soft); }
+  .news-card { background: var(--card-bg); border: 1px solid var(--line); border-radius: 24px; padding: 22px 26px; margin-bottom: 12px; box-shadow: 0 8px 30px rgba(61,36,15,0.04); transition: background 0.2s, border-color 0.2s, transform 0.2s; }
+  .news-card:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(61,36,15,0.08); }
+  .news-card.featured { border-left: 3px solid var(--accent); }
+  .news-card.featured:hover { border-color: var(--accent); }
+  .card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .rank-badge { background: var(--accent); color: #fff7f0; font-weight: 700; font-size: 12px; padding: 2px 8px; border-radius: 6px; }
+  .emoji-icon { font-size: 18px; }
+  .card-header-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .emoji-sm { font-size: 14px; }
+  .news-card h3 { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 8px; line-height: 1.5; }
+  .journal-source { font-size: 12px; color: var(--accent); margin-bottom: 8px; opacity: 0.8; }
+  .news-card p { font-size: 13.5px; line-height: 1.75; color: var(--muted); }
+  .card-footer { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .tag { padding: 2px 9px; background: var(--accent-soft); border-radius: 999px; font-size: 11px; color: var(--accent); }
+  .news-card a { font-size: 12px; color: var(--accent); text-decoration: none; opacity: 0.7; margin-left: auto; }
+  .news-card a:hover { opacity: 1; }
+  .utility-high { color: #5a7a3a; font-size: 11px; font-weight: 600; padding: 2px 8px; background: rgba(90,122,58,0.1); border-radius: 4px; }
+  .utility-mid { color: #9f7a2e; font-size: 11px; font-weight: 600; padding: 2px 8px; background: rgba(159,122,46,0.1); border-radius: 4px; }
+  .utility-low { color: var(--muted); font-size: 11px; font-weight: 600; padding: 2px 8px; background: rgba(118,100,83,0.08); border-radius: 4px; }
+  .utility-sm { font-size: 10px; }
+  .pico-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; padding: 12px; background: rgba(255,253,249,0.8); border-radius: 14px; border: 1px solid var(--line); }
+  .pico-item { display: flex; gap: 8px; align-items: baseline; }
+  .pico-label { font-size: 10px; font-weight: 700; color: #fff7f0; background: var(--accent); padding: 2px 6px; border-radius: 4px; flex-shrink: 0; }
+  .pico-text { font-size: 12px; color: var(--muted); line-height: 1.4; }
+  .keywords-section { margin-bottom: 36px; }
+  .keywords { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .keyword { padding: 5px 14px; background: var(--accent-soft); border: 1px solid var(--line); border-radius: 20px; font-size: 12px; color: var(--accent); cursor: default; transition: background 0.2s; }
+  .keyword:hover { background: rgba(140,79,43,0.18); }
+  .topic-section { margin-bottom: 36px; }
+  .topic-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .topic-name { font-size: 13px; color: var(--muted); width: 100px; flex-shrink: 0; text-align: right; }
+  .topic-bar-bg { flex: 1; height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; }
+  .topic-bar { height: 100%; background: linear-gradient(90deg, var(--accent), #c47a4a); border-radius: 4px; transition: width 0.6s ease; }
+  .topic-count { font-size: 12px; color: var(--accent); width: 24px; }
+  .clinic-banner { margin-top: 48px; animation: fadeUp 0.5s ease 0.4s both; }
+  .clinic-link { display: flex; align-items: center; gap: 14px; padding: 18px 24px; background: var(--card-bg); border: 1px solid var(--line); border-radius: 24px; text-decoration: none; color: var(--text); transition: all 0.2s; box-shadow: 0 8px 30px rgba(61,36,15,0.04); }
+  .clinic-link:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(61,36,15,0.08); }
+  .clinic-icon { font-size: 28px; flex-shrink: 0; }
+  .clinic-name { font-size: 15px; font-weight: 700; color: var(--text); flex: 1; }
+  .clinic-arrow { font-size: 18px; color: var(--accent); font-weight: 700; }
+  footer { margin-top: 32px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 11.5px; color: var(--muted); display: flex; justify-content: space-between; animation: fadeUp 0.5s ease 0.5s both; }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 600px) { .container { padding: 36px 18px 60px; } .summary-card, .news-card { padding: 20px 18px; } .pico-grid { grid-template-columns: 1fr; } footer { flex-direction: column; gap: 6px; text-align: center; } .topic-name { width: 70px; font-size: 11px; } }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="logo">🧠</div>
+    <div class="header-text">
+      <h1>rTMS Brain &middot; 重複經顱磁刺激文獻日報</h1>
+      <div class="header-meta">
+        <span class="badge badge-date">📅 2026年9月1日</span>
+        <span class="badge badge-count">📊 4 篇文獻</span>
+        <span class="badge badge-source">Powered by PubMed + NVIDIA AI</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="summary-card">
+    <h2>📋 今日 rTMS 文獻趨勢</h2>
+    <p class="summary-text">今日 rTMS 相關文獻聚焦於基礎神經科學與認知神經影像領域，未見直接臨床 rTMS 干預研究，但多篇論文為理解 rTMS 作用機制提供重要理論基礎，特別是在皮質結構、網路結構與認知功能之間的關係上。</p>
+  </div>
+
+  <div class='section'><div class='section-title'><span class='section-icon'>⭐</span>今日精選 TOP Picks</div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#1</span>
+            <span class="emoji-icon">🧠</span>
+            <span class="utility-high">高實用性</span>
+          </div>
+          <h3>皮質表面積與一般認知能力的雙向遺傳關係：來自孟德爾隨機化的證據</h3>
+          <p class="journal-source">Human brain mapping &middot; Cerebral Cortical Structural Variation and General Cognitive Ability: Evidence From Mendelian Randomization.</p>
+          <p>發現外側前預葉與顳葉皮質表面積與一般認知能力存在雙向因果關係，為 rTMS 鏈對前額葉區域進行認知增強提供遺傳層面的機制支持。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">11,289 名英國生物銀行參與者</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">基因資訊化皮質細分 + 孟德爾隨機化分析</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">總皮質表面積 vs 一般認知能力（言語-數字推理）</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">外側前預葉與顳葉皮質表面積與認知能力呈陽性雙向關聯，皮質厚度關聯較弱</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">認知功能</span><span class="tag">神經調控技術</span><span class="tag">神經影像導航</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42669588/" target="_blank">閱讀原文 →</a>
+          </div>
+        </div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#2</span>
+            <span class="emoji-icon">🌐</span>
+            <span class="utility-high">高實用性</span>
+          </div>
+          <h3>多層網路模型揭示病灶-症狀的多對多關係：來自低級別膠質瘤患者的證據</h3>
+          <p class="journal-source">NeuroImage. Clinical &middot; Beyond one-to-one mappings: Modelling distributed lesion-symptom relationships with multilayer networks.</p>
+          <p>使用多層網路分析證實認知功能（如語言流暢度）與多個皮質及白質區域的結構損害存在多對多映射，挑戰傳統一對一病灶-症狀映射模型。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">252 名接受清醒神經外科手術的低級別膠質瘤患者</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">三層網路模型（神經心理任務、結構性脫節、皮質損傷）</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">單一對應 vs 多對多病灶-症狀關係</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">語言流暢度等認知功能受多個皮質與白質通道共同影響，具網域通用性的區域被識別</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span><span class="tag">認知功能</span><span class="tag">神經影像導航</span><span class="tag">神經可塑性</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42669223/" target="_blank">閱讀原文 →</a>
+          </div>
+        </div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#3</span>
+            <span class="emoji-icon">🤖</span>
+            <span class="utility-mid">中實用性</span>
+          </div>
+          <h3>美國住院復健設施中運營型人工智慧的採用趨勢與組織決策因素</h3>
+          <p class="journal-source">Archives of physical medicine and rehabilitation &middot; Operational AI Adoption in U.S. Inpatient Rehabilitation Facilities: Organizational Selection and Domain Heterogeneity, 2021-2024.</p>
+          <p>運營類人工智慧在美國住院復健設施中的使用從 2021 年的 11.1% 增長至 2024 年的 24.9%，主要由系統附屬、非營利與教學設施領銜，排班工具採用滯後。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">276 家美國住院復健設施（IRFs），提供 766 個醫院年資料</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">觀察性研究：運營類人工智慧的採用（預測需求、排班、優化效率）</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">不同 organisational 特徵（系統附屬 vs 獨立、營利 vs 非營利）</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">組織結構解釋 50-67% 採用變異，優化運營效率為主導域；排班工具後退，顯示實施障礙</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">中風復健</span><span class="tag">神經調控技術</span><span class="tag">技術採用</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42669373/" target="_blank">閱讀原文 →</a>
+          </div>
+        </div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#4</span>
+            <span class="emoji-icon">⚡</span>
+            <span class="utility-low">低實用性</span>
+          </div>
+          <h3>兒童發作性室管膜周圍結節性異位灶伴癲癇的神經外科管理：系統性文獻回顧</h3>
+          <p class="journal-source">Seizure &middot; Neurosurgical management of childhood-onset epilepsy in periventricular nodular heterotopia: A systematic review of effectiveness and outcomes.</p>
+          <p>在 134 名兒童 PVNH 相關癲癇患者中，神經外科介入可使 50.7% 達成無發作或僅先兆，側側病灶與完全結節切除顯著改善預後。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">134 名 MRI 或病理確診 PVNH，癲癇 onset < 18 歲 的兒童</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">神經外科及侵入性介入（含立體定位EEG、激光熱消融等）</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">單側 vs 雙側 PVNH；完整 vs 不完整結節切除</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">無發作率：單側 75.9% vs 雙側 33.8%；完整切除 72.9% vs 不完整 25.0%；永久性併發症 10.4%（主要視野缺損）</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">癲癇</span><span class="tag">神經調控技術</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42669252/" target="_blank">閱讀原文 →</a>
+          </div>
+        </div></div>
+
+  
+
+  <div class='topic-section section'><div class='section-title'><span class='section-icon'>📊</span>主題分佈</div>
+            <div class="topic-row">
+              <span class="topic-name">認知功能</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:50%"></div></div>
+              <span class="topic-count">2</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">神經調控技術</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:100%"></div></div>
+              <span class="topic-count">4</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">癲癇</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:25%"></div></div>
+              <span class="topic-count">1</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">中風復健</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:25%"></div></div>
+              <span class="topic-count">1</span>
+            </div></div>
+
+  <div class='keywords-section section'><div class='section-title'><span class='section-icon'>🏷️</span>關鍵字</div><div class='keywords'><span class="keyword">皮質表面積</span><span class="keyword">一般認知能力</span><span class="keyword">孟德爾隨機化</span><span class="keyword">多層網路分析</span><span class="keyword">病灶-症狀映射</span><span class="keyword">運營AI</span><span class="keyword">住院復健</span><span class="keyword">室管膜周圍結節性異位灶</span><span class="keyword">兒童癲癇</span></div></div>
+
+  <div class="clinic-banner">
+    <a href="https://www.leepsyclinic.com/" class="clinic-link" target="_blank">
+      <span class="clinic-icon">🏥</span>
+      <span class="clinic-name">李政洋身心診所首頁</span>
+      <span class="clinic-arrow">→</span>
+    </a>
+  </div>
+
+  <footer>
+    <span>資料來源：PubMed &middot; 分析模型：nvidia/nemotron-3-super-120b-a12b</span>
+    <span><a href="https://github.com/u8901006/rTMS-brain">GitHub</a></span>
+  </footer>
+</div>
+</body>
+</html>
