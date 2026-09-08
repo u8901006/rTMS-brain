@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>rTMS Brain &middot; 重複經顱磁刺激文獻日報 &middot; 2026年9月9日</title>
+<meta name="description" content="2026年9月9日 rTMS 重複經顱磁刺激文獻日報，由 AI 自動彙整 PubMed 最新論文"/>
+<style>
+  :root { --bg: #f6f1e8; --surface: #fffaf2; --line: #d8c5ab; --text: #2b2118; --muted: #766453; --accent: #8c4f2b; --accent-soft: #ead2bf; --card-bg: color-mix(in srgb, var(--surface) 92%, white); }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: radial-gradient(circle at top, #fff6ea 0, var(--bg) 55%, #ead8c6 100%); color: var(--text); font-family: "Noto Sans TC", "PingFang TC", "Helvetica Neue", Arial, sans-serif; min-height: 100vh; overflow-x: hidden; }
+  .container { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding: 60px 32px 80px; }
+  header { display: flex; align-items: center; gap: 16px; margin-bottom: 52px; animation: fadeDown 0.6s ease both; }
+  .logo { width: 48px; height: 48px; border-radius: 14px; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; box-shadow: 0 4px 20px rgba(140,79,43,0.25); }
+  .header-text h1 { font-size: 22px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
+  .header-meta { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; align-items: center; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; letter-spacing: 0.3px; }
+  .badge-date { background: var(--accent-soft); border: 1px solid var(--line); color: var(--accent); }
+  .badge-count { background: rgba(140,79,43,0.06); border: 1px solid var(--line); color: var(--muted); }
+  .badge-source { background: transparent; color: var(--muted); font-size: 11px; padding: 0 4px; }
+  .summary-card { background: var(--card-bg); border: 1px solid var(--line); border-radius: 24px; padding: 28px 32px; margin-bottom: 32px; box-shadow: 0 20px 60px rgba(61,36,15,0.06); animation: fadeUp 0.5s ease 0.1s both; }
+  .summary-card h2 { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.6px; color: var(--accent); margin-bottom: 16px; }
+  .summary-text { font-size: 15px; line-height: 1.8; color: var(--text); }
+  .section { margin-bottom: 36px; animation: fadeUp 0.5s ease both; }
+  .section-title { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .section-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; background: var(--accent-soft); }
+  .news-card { background: var(--card-bg); border: 1px solid var(--line); border-radius: 24px; padding: 22px 26px; margin-bottom: 12px; box-shadow: 0 8px 30px rgba(61,36,15,0.04); transition: background 0.2s, border-color 0.2s, transform 0.2s; }
+  .news-card:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(61,36,15,0.08); }
+  .news-card.featured { border-left: 3px solid var(--accent); }
+  .news-card.featured:hover { border-color: var(--accent); }
+  .card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .rank-badge { background: var(--accent); color: #fff7f0; font-weight: 700; font-size: 12px; padding: 2px 8px; border-radius: 6px; }
+  .emoji-icon { font-size: 18px; }
+  .card-header-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .emoji-sm { font-size: 14px; }
+  .news-card h3 { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 8px; line-height: 1.5; }
+  .journal-source { font-size: 12px; color: var(--accent); margin-bottom: 8px; opacity: 0.8; }
+  .news-card p { font-size: 13.5px; line-height: 1.75; color: var(--muted); }
+  .card-footer { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .tag { padding: 2px 9px; background: var(--accent-soft); border-radius: 999px; font-size: 11px; color: var(--accent); }
+  .news-card a { font-size: 12px; color: var(--accent); text-decoration: none; opacity: 0.7; margin-left: auto; }
+  .news-card a:hover { opacity: 1; }
+  .utility-high { color: #5a7a3a; font-size: 11px; font-weight: 600; padding: 2px 8px; background: rgba(90,122,58,0.1); border-radius: 4px; }
+  .utility-mid { color: #9f7a2e; font-size: 11px; font-weight: 600; padding: 2px 8px; background: rgba(159,122,46,0.1); border-radius: 4px; }
+  .utility-low { color: var(--muted); font-size: 11px; font-weight: 600; padding: 2px 8px; background: rgba(118,100,83,0.08); border-radius: 4px; }
+  .utility-sm { font-size: 10px; }
+  .pico-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; padding: 12px; background: rgba(255,253,249,0.8); border-radius: 14px; border: 1px solid var(--line); }
+  .pico-item { display: flex; gap: 8px; align-items: baseline; }
+  .pico-label { font-size: 10px; font-weight: 700; color: #fff7f0; background: var(--accent); padding: 2px 6px; border-radius: 4px; flex-shrink: 0; }
+  .pico-text { font-size: 12px; color: var(--muted); line-height: 1.4; }
+  .keywords-section { margin-bottom: 36px; }
+  .keywords { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .keyword { padding: 5px 14px; background: var(--accent-soft); border: 1px solid var(--line); border-radius: 20px; font-size: 12px; color: var(--accent); cursor: default; transition: background 0.2s; }
+  .keyword:hover { background: rgba(140,79,43,0.18); }
+  .topic-section { margin-bottom: 36px; }
+  .topic-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .topic-name { font-size: 13px; color: var(--muted); width: 100px; flex-shrink: 0; text-align: right; }
+  .topic-bar-bg { flex: 1; height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; }
+  .topic-bar { height: 100%; background: linear-gradient(90deg, var(--accent), #c47a4a); border-radius: 4px; transition: width 0.6s ease; }
+  .topic-count { font-size: 12px; color: var(--accent); width: 24px; }
+  .clinic-banner { margin-top: 48px; animation: fadeUp 0.5s ease 0.4s both; }
+  .clinic-link { display: flex; align-items: center; gap: 14px; padding: 18px 24px; background: var(--card-bg); border: 1px solid var(--line); border-radius: 24px; text-decoration: none; color: var(--text); transition: all 0.2s; box-shadow: 0 8px 30px rgba(61,36,15,0.04); }
+  .clinic-link:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(61,36,15,0.08); }
+  .clinic-icon { font-size: 28px; flex-shrink: 0; }
+  .clinic-name { font-size: 15px; font-weight: 700; color: var(--text); flex: 1; }
+  .clinic-arrow { font-size: 18px; color: var(--accent); font-weight: 700; }
+  footer { margin-top: 32px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 11.5px; color: var(--muted); display: flex; justify-content: space-between; animation: fadeUp 0.5s ease 0.5s both; }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 600px) { .container { padding: 36px 18px 60px; } .summary-card, .news-card { padding: 20px 18px; } .pico-grid { grid-template-columns: 1fr; } footer { flex-direction: column; gap: 6px; text-align: center; } .topic-name { width: 70px; font-size: 11px; } }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="logo">🧠</div>
+    <div class="header-text">
+      <h1>rTMS Brain &middot; 重複經顱磁刺激文獻日報</h1>
+      <div class="header-meta">
+        <span class="badge badge-date">📅 2026年9月9日</span>
+        <span class="badge badge-count">📊 14 篇文獻</span>
+        <span class="badge badge-source">Powered by PubMed + NVIDIA AI</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="summary-card">
+    <h2>📋 今日 rTMS 文獻趨勢</h2>
+    <p class="summary-text">今日 rTMS 文獻聚焦於認知功能與神經康復領域，特別是阿茲海默症與中風後運動恢復的應用證據逐漸累積，顯示出高頻 rTMS 對前顳葉及運動皮質標靶的治療潛力，而技術導航與個體差異調控成為新興趨勢。</p>
+  </div>
+
+  <div class='section'><div class='section-title'><span class='section-icon'>⭐</span>今日精選 TOP Picks</div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#1</span>
+            <span class="emoji-icon">🧠</span>
+            <span class="utility-high">高實用性</span>
+          </div>
+          <h3>rTMS 對輕度至中度阿茲海默症患者認知功能的療效與持久性：系統性文獻回顧與Meta-分析</h3>
+          <p class="journal-source">Psychogeriatrics : the official journal of the Japanese Psychogeriatric Society &middot; Efficacy and Durability of Repetitive Transcranial Magnetic Stimulation on Cognitive Function in Patients With Mild-to-Moderate Alzheimer's Disease: A Systematic Review and Meta-Analysis.</p>
+          <p>高頻 rTMS（特別是左側 DLPFC）可顯著改善 MMSE 得分（g=0.41），證實其在輕中度 AD 中具備小至中等的認知益處，治療時長為重要調節因子。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">輕度至中度阿茲海默症患者</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">高頻 rTMS 或 iTBS（多為左側 DLPFC）</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">假性刺激對照</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">MMSE 得分顯著改善（g=0.41, 95%CI [0.06, 0.75], p=0.021）</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">認知功能</span><span class="tag">阿茲海默症</span><span class="tag">神經調控技術</span><span class="tag">TMS 參數最佳化</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42705844/" target="_blank">閱讀原文 →</a>
+          </div>
+        </div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#2</span>
+            <span class="emoji-icon">⚡</span>
+            <span class="utility-high">高實用性</span>
+          </div>
+          <h3>高頻 rTMS 與 rPMS 對中風患者即時神經調控機制的 fNIRS 研究：顯示前顳抑制與感運動耦合的互補路徑</h3>
+          <p class="journal-source">Journal of neural engineering &middot; Neuromodulation Effects of HF-rTMS and rPMS on stroke patients: an fNIRS study.</p>
+          <p>rTMS 抑制前顳過度活化以優化感運動網路，而 rPMS 增強底層感覺輸入驅動，兩者機制互補，為中風復健提供精準刺激策略依據。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">57 名慢性中風患者</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">高頻 rTMS (5 Hz, 1500 脈衝 over ipsilesional M1) 或 rPMS (25 Hz, 1500 脈衝 over Erb's point)</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">兩種介入間的即時神經生理反應比較</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">rTMS 減少前顳血氧與功能連接（尤為 DLPFC-IFG），rPMS 增強 M1 活化與 S1-IFG 耦合</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">中風復健</span><span class="tag">神經調控技術</span><span class="tag">運動皮質興奮性</span><span class="tag">神經可塑性</span><span class="tag">fNIRS</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42705344/" target="_blank">閱讀原文 →</a>
+          </div>
+        </div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#3</span>
+            <span class="emoji-icon">🧭</span>
+            <span class="utility-high">高實用性</span>
+          </div>
+          <h3>術前導航 TMS 在中風後失語症患者進行 intracortical BCI 植入中的應用個案報告</h3>
+          <p class="journal-source">Brain stimulation &middot; Preoperative navigated TMS workflow for intracortical BCI implantation in post-stroke aphasia: a case report.</p>
+          <p>導航 TMS 成功繪製語言網路圖譜，引導微創 BCI 電極植入，避開關鍵區域，為失語症患者的神經介入提供安全精準的術前規劃工具。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">一名中風後失語症患者</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">術前導航 TMS 語言功能映射</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">無導航映射的傳統路徑</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">成功規劃並執行 intracortical BCI 植入，術後語言功能評估顯示可行性與安全性</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">中風復健</span><span class="tag">神經影像導航</span><span class="tag">腦機介面</span><span class="tag">失語症</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42705454/" target="_blank">閱讀原文 →</a>
+          </div>
+        </div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#4</span>
+            <span class="emoji-icon">🔊</span>
+            <span class="utility-mid">中實用性</span>
+          </div>
+          <h3>雙頻超聲刺激（Decapulse TUS）對運動皮質引起廣泛雙向調節 gamma 振盪規律性</h3>
+          <p class="journal-source">Brain stimulation &middot; Decapulse transcranial ultrasound stimulation (TUS) over the motor cortex induces widespread bidirectional modulation of gamma oscillations regularity.</p>
+          <p>新穎的 Decapulse TUS 可在運動皮質引起 gamma 振盪的雙向（增強/抑制）規律性調節，展現超聲刺激在精細腦波塑造中的潛力。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">健康受試者（隱含）</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">Decapulse TUS 過運動皮質</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">基線或假刺激（隱含）</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">廣泛皮質區域 gamma 振盪規律性的雙向變化</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span><span class="tag">運動皮質興奮性</span><span class="tag">神經影像導航</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42705453/" target="_blank">閱讀原文 →</a>
+          </div>
+        </div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#5</span>
+            <span class="emoji-icon">📊</span>
+            <span class="utility-mid">中實用性</span>
+          </div>
+          <h3>神經認知過程在逐步問題解決任務中的動態變化：EEG 與計算模型結合評估神經效率</h3>
+          <p class="journal-source">Journal of neural engineering &middot; Examination of neurocognitive processes during execution of sequential problem-solving tasks under varying demand.</p>
+          <p>隨著任務需求增加，腦電波中 theta、alpha、beta、gamma 頻帶功率普遍升高，但神經效率下降，揭示認知負荷與神經資源補償的動態關係。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">執行逐步問題解決任務的受試者（隱含）</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">不同認知需求階段的任務執行</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">低需求 vs 高需求條件</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">高需求導致行為表現下降（減少最適性與相似度）及廣泛腦區頻帶功率增強，神經效率降低</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span><span class="tag">認知功能</span><span class="tag">EEG</span><span class="tag">精神工作量</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42708249/" target="_blank">閱讀原文 →</a>
+          </div>
+        </div></div>
+
+  <div class='section'><div class='section-title'><span class='section-icon'>📚</span>其他值得關注的文獻</div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🤖</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>IMU-weighted multimodal fusion 手勢識別系統：跨手臂位置的穩健控制新策略</h3>
+          <p class="journal-source">Journal of neural engineering</p>
+          <p>結合 IMU、sEMG 與 A-mode ultrasound，藉由手臂角度動態加權模型，顯著提升跨位置手勢辨識準確率（85.88%），為神經義肢提供實用解決方案。</p>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span><span class="tag">運動皮質興奮性</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42705333/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">💤</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>局部調節睡眠慢波依賴於聽覺刺激的時間順序：評論並指出方法論爭議</h3>
+          <p class="journal-source">NeuroImage</p>
+          <p>為先前研究之評論，未提供新實證數據，僅重討聽覺刺激時機對慢波調節之影響，科學貢獻有限。</p>
+          <div class="card-footer">
+            <span class="tag">失眠</span><span class="tag">神經調控技術</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42706001/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">👁️</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>青春期早期視覺通路發育：皮質通路增強與皮質下通路（視丘-杏仁核）隨年齡遞減</h3>
+          <p class="journal-source">Human brain mapping</p>
+          <p>使用大樣本青少年 dMRI 證實，皮質視通路（經下顳）隨年齡增強，而皮質下通路（視丘-杏仁核）隨青春期發育而遞減，雙方連接強度皆與視覺反應速度正相關。</p>
+          <div class="card-footer">
+            <span class="tag">神經影像導航</span><span class="tag">認知功能</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42706805/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🧠</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>雙側島葉與初級體感皮質同時刺激引發多成分體感知覺</h3>
+          <p class="journal-source">Brain stimulation</p>
+          <p>同時刺激島葉與體感皮質可誘發複雜、多維度的體感知覺體驗，揭示皮質間互動在體感整合中的作用。</p>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span><span class="tag">體感</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42705455/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">👁️</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>視網膜假體模擬中，盲點的知覺特徵（填補 vs 黑色）顯著影響視任務表現，黑色盲點有助於磷ene 偵測</h3>
+          <p class="journal-source">Journal of neural engineering</p>
+          <p>在模擬視網膜退化的 VR 環境中，感知為黑色的盲點（而非腦內填補）能提升磷ene 訊號的偵測能力，提示視覺假體設計需考慮個體知覺差異。</p>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span><span class="tag">視覺</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42705337/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🔇</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>耳聲類神經植入物（CI）在連續語音中的 EEG 載識去除新方法：CORSICA 技術有效保留神經訊號</h3>
+          <p class="journal-source">Journal of neural engineering</p>
+          <p>開發出基於互相關的 ICA 方法（CORSICA），能自動去除 CI 由連續語音誘發的 stimulant artefact，無需手動成分選擇，適用於自然語境下的語言腦電圖研究。</p>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span><span class="tag">EEG</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42705338/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🧵</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>腓骨神經束內電場導引：橫向與縱向電極位置影響肌肉激活模式，雙極刺激進一步塑造選擇性神經纖維募集</h3>
+          <p class="journal-source">Journal of neural engineering</p>
+          <p>在胫神經束內不同橫向/縱向位置置入 LIFE 電極，可誘導不同小腿肌肉區域激活；雙極刺激較單極更能精細調整神經纖維募集樣式，支持未來生物電子療法的精準性提升。</p>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span><span class="tag">末梢神經刺激</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42705328/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🔬</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3> cuff 型末梢神經介電極設計對錄製品質的影響：絕緣完整度遠勝於幾何參數</h3>
+          <p class="journal-source">Journal of neural engineering</p>
+          <p>實驗證明絕緣層長度與密封完整性是 cuff 電極錄製品質的主導因素，其影響超過所有幾何設計參數之和，強調材料與製程在神介電極開發中的關鍵性。</p>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span><span class="tag">末梢神經介面</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42705325/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">👍</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>連續滑動壓力反饋勝過離散振動反饋在提升超數機械拇固有感覺方面的行為與 EEG 證據</h3>
+          <p class="journal-source">Journal of neural engineering</p>
+          <p>壓力回饋因提供類似自然固有感的連續類比訊號，而在運動準確度與腦網路效率（beta 小世界性）上優於振動回饋，振動回饋則導致較廣泛的皮質同步去同步（ERD），反映較高認知負荷。</p>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span><span class="tag">感觉反馈</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42705319/" target="_blank">PubMed →</a>
+          </div>
+        </div></div>
+
+  <div class='topic-section section'><div class='section-title'><span class='section-icon'>📊</span>主題分佈</div>
+            <div class="topic-row">
+              <span class="topic-name">認知功能</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:25%"></div></div>
+              <span class="topic-count">2</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">中風復健</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:25%"></div></div>
+              <span class="topic-count">2</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">神經調控技術</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:100%"></div></div>
+              <span class="topic-count">8</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">運動皮質興奮性</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:37%"></div></div>
+              <span class="topic-count">3</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">神經影像導航</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:37%"></div></div>
+              <span class="topic-count">3</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">阿茲海默症</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:12%"></div></div>
+              <span class="topic-count">1</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">fNIRS</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:12%"></div></div>
+              <span class="topic-count">1</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">失語症</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:12%"></div></div>
+              <span class="topic-count">1</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">TUS</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:12%"></div></div>
+              <span class="topic-count">1</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">神經可塑性</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:25%"></div></div>
+              <span class="topic-count">2</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">EEG</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:37%"></div></div>
+              <span class="topic-count">3</span>
+            </div></div>
+
+  <div class='keywords-section section'><div class='section-title'><span class='section-icon'>🏷️</span>關鍵字</div><div class='keywords'><span class="keyword">rTMS</span><span class="keyword">阿茲海默症</span><span class="keyword">中風復健</span><span class="keyword">認知功能</span><span class="keyword">神經導航</span><span class="keyword">TUS</span><span class="keyword">fNIRS</span><span class="keyword">神經可塑性</span></div></div>
+
+  <div class="clinic-banner">
+    <a href="https://www.leepsyclinic.com/" class="clinic-link" target="_blank">
+      <span class="clinic-icon">🏥</span>
+      <span class="clinic-name">李政洋身心診所首頁</span>
+      <span class="clinic-arrow">→</span>
+    </a>
+  </div>
+
+  <footer>
+    <span>資料來源：PubMed &middot; 分析模型：nvidia/nemotron-3-super-120b-a12b</span>
+    <span><a href="https://github.com/u8901006/rTMS-brain">GitHub</a></span>
+  </footer>
+</div>
+</body>
+</html>
