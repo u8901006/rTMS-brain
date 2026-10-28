@@ -16,7 +16,7 @@ import httpx
 API_BASE = os.environ.get(
     "NVIDIA_API_BASE", "https://integrate.api.nvidia.com/v1"
 )
-MODEL_NAME = os.environ.get("NVIDIA_MODEL", "nvidia/nemotron-3-ultra-550b-a55b")
+MODEL_NAME = os.environ.get("NVIDIA_MODEL", "nvidia/nemotron-3.5-lightning-30b-a3b")
 
 SYSTEM_PROMPT = (
     "你是神經調控與 rTMS（重複經顱磁刺激）領域的資深研究員與科學傳播者。你的任務是：\n"
@@ -118,10 +118,10 @@ def analyze_papers(api_key: str, papers_data: dict) -> dict:
         "top_p": 0.95,
         "stream": False,
         "chat_template_kwargs": {"enable_thinking": False},
-        "max_tokens": 8192,
+        "max_tokens": 16384,
     }
 
-    models_to_try = [MODEL_NAME, "nvidia/nemotron-3-ultra-550b-a55b"]
+    models_to_try = list(dict.fromkeys([MODEL_NAME] + [s.strip() for s in os.environ.get("NVIDIA_MODELS", "deepseek-ai/deepseek-v4.1-flash").split(",") if s.strip()]))
 
     for model in models_to_try:
         payload["model"] = model
