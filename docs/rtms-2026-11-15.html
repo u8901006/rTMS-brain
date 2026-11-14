@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>rTMS Brain &middot; 重複經顱磁刺激文獻日報 &middot; 2026年11月15日</title>
+<meta name="description" content="2026年11月15日 rTMS 重複經顱磁刺激文獻日報，由 AI 自動彙整 PubMed 最新論文"/>
+<style>
+  :root { --bg: #f6f1e8; --surface: #fffaf2; --line: #d8c5ab; --text: #2b2118; --muted: #766453; --accent: #8c4f2b; --accent-soft: #ead2bf; --card-bg: color-mix(in srgb, var(--surface) 92%, white); }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: radial-gradient(circle at top, #fff6ea 0, var(--bg) 55%, #ead8c6 100%); color: var(--text); font-family: "Noto Sans TC", "PingFang TC", "Helvetica Neue", Arial, sans-serif; min-height: 100vh; overflow-x: hidden; }
+  .container { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding: 60px 32px 80px; }
+  header { display: flex; align-items: center; gap: 16px; margin-bottom: 52px; animation: fadeDown 0.6s ease both; }
+  .logo { width: 48px; height: 48px; border-radius: 14px; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; box-shadow: 0 4px 20px rgba(140,79,43,0.25); }
+  .header-text h1 { font-size: 22px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
+  .header-meta { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; align-items: center; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; letter-spacing: 0.3px; }
+  .badge-date { background: var(--accent-soft); border: 1px solid var(--line); color: var(--accent); }
+  .badge-count { background: rgba(140,79,43,0.06); border: 1px solid var(--line); color: var(--muted); }
+  .badge-source { background: transparent; color: var(--muted); font-size: 11px; padding: 0 4px; }
+  .summary-card { background: var(--card-bg); border: 1px solid var(--line); border-radius: 24px; padding: 28px 32px; margin-bottom: 32px; box-shadow: 0 20px 60px rgba(61,36,15,0.06); animation: fadeUp 0.5s ease 0.1s both; }
+  .summary-card h2 { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.6px; color: var(--accent); margin-bottom: 16px; }
+  .summary-text { font-size: 15px; line-height: 1.8; color: var(--text); }
+  .section { margin-bottom: 36px; animation: fadeUp 0.5s ease both; }
+  .section-title { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .section-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; background: var(--accent-soft); }
+  .news-card { background: var(--card-bg); border: 1px solid var(--line); border-radius: 24px; padding: 22px 26px; margin-bottom: 12px; box-shadow: 0 8px 30px rgba(61,36,15,0.04); transition: background 0.2s, border-color 0.2s, transform 0.2s; }
+  .news-card:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(61,36,15,0.08); }
+  .news-card.featured { border-left: 3px solid var(--accent); }
+  .news-card.featured:hover { border-color: var(--accent); }
+  .card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .rank-badge { background: var(--accent); color: #fff7f0; font-weight: 700; font-size: 12px; padding: 2px 8px; border-radius: 6px; }
+  .emoji-icon { font-size: 18px; }
+  .card-header-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .emoji-sm { font-size: 14px; }
+  .news-card h3 { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 8px; line-height: 1.5; }
+  .journal-source { font-size: 12px; color: var(--accent); margin-bottom: 8px; opacity: 0.8; }
+  .news-card p { font-size: 13.5px; line-height: 1.75; color: var(--muted); }
+  .card-footer { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .tag { padding: 2px 9px; background: var(--accent-soft); border-radius: 999px; font-size: 11px; color: var(--accent); }
+  .news-card a { font-size: 12px; color: var(--accent); text-decoration: none; opacity: 0.7; margin-left: auto; }
+  .news-card a:hover { opacity: 1; }
+  .utility-high { color: #5a7a3a; font-size: 11px; font-weight: 600; padding: 2px 8px; background: rgba(90,122,58,0.1); border-radius: 4px; }
+  .utility-mid { color: #9f7a2e; font-size: 11px; font-weight: 600; padding: 2px 8px; background: rgba(159,122,46,0.1); border-radius: 4px; }
+  .utility-low { color: var(--muted); font-size: 11px; font-weight: 600; padding: 2px 8px; background: rgba(118,100,83,0.08); border-radius: 4px; }
+  .utility-sm { font-size: 10px; }
+  .pico-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; padding: 12px; background: rgba(255,253,249,0.8); border-radius: 14px; border: 1px solid var(--line); }
+  .pico-item { display: flex; gap: 8px; align-items: baseline; }
+  .pico-label { font-size: 10px; font-weight: 700; color: #fff7f0; background: var(--accent); padding: 2px 6px; border-radius: 4px; flex-shrink: 0; }
+  .pico-text { font-size: 12px; color: var(--muted); line-height: 1.4; }
+  .keywords-section { margin-bottom: 36px; }
+  .keywords { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .keyword { padding: 5px 14px; background: var(--accent-soft); border: 1px solid var(--line); border-radius: 20px; font-size: 12px; color: var(--accent); cursor: default; transition: background 0.2s; }
+  .keyword:hover { background: rgba(140,79,43,0.18); }
+  .topic-section { margin-bottom: 36px; }
+  .topic-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .topic-name { font-size: 13px; color: var(--muted); width: 100px; flex-shrink: 0; text-align: right; }
+  .topic-bar-bg { flex: 1; height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; }
+  .topic-bar { height: 100%; background: linear-gradient(90deg, var(--accent), #c47a4a); border-radius: 4px; transition: width 0.6s ease; }
+  .topic-count { font-size: 12px; color: var(--accent); width: 24px; }
+  .clinic-banner { margin-top: 48px; animation: fadeUp 0.5s ease 0.4s both; }
+  .clinic-link { display: flex; align-items: center; gap: 14px; padding: 18px 24px; background: var(--card-bg); border: 1px solid var(--line); border-radius: 24px; text-decoration: none; color: var(--text); transition: all 0.2s; box-shadow: 0 8px 30px rgba(61,36,15,0.04); }
+  .clinic-link:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(61,36,15,0.08); }
+  .clinic-icon { font-size: 28px; flex-shrink: 0; }
+  .clinic-name { font-size: 15px; font-weight: 700; color: var(--text); flex: 1; }
+  .clinic-arrow { font-size: 18px; color: var(--accent); font-weight: 700; }
+  footer { margin-top: 32px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 11.5px; color: var(--muted); display: flex; justify-content: space-between; animation: fadeUp 0.5s ease 0.5s both; }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 600px) { .container { padding: 36px 18px 60px; } .summary-card, .news-card { padding: 20px 18px; } .pico-grid { grid-template-columns: 1fr; } footer { flex-direction: column; gap: 6px; text-align: center; } .topic-name { width: 70px; font-size: 11px; } }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="logo">🧠</div>
+    <div class="header-text">
+      <h1>rTMS Brain &middot; 重複經顱磁刺激文獻日報</h1>
+      <div class="header-meta">
+        <span class="badge badge-date">📅 2026年11月15日</span>
+        <span class="badge badge-count">📊 15 篇文獻</span>
+        <span class="badge badge-source">Powered by PubMed + NVIDIA AI</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="summary-card">
+    <h2>📋 今日 rTMS 文獻趨勢</h2>
+    <p class="summary-text">今日文獻聚焦於 rTMS 精準調控與神經生物學基礎，涵蓋吞嚥障礙、帕金森病 DBS 參數偵測、阿茲海默症 Gamma 刺激個體化，以及 BBB 完整性系統影響。雖無新的大規模臨床試驗，但展現出針對特定症狀（如吞嚥、帕金森運動症）的神經網絡目標導向與參數敏感性分析趨勢。</p>
+  </div>
+
+  <div class='section'><div class='section-title'><span class='section-icon'>⭐</span>今日精選 TOP Picks</div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#1</span>
+            <span class="emoji-icon">🧠</span>
+            <span class="utility-mid">中實用性</span>
+          </div>
+          <h3>基於 MEG 導向的個體化多頻道 tDCS 對吞嚥相關皮質網絡的影響</h3>
+          <p class="journal-source">Journal of neuroengineering and rehabilitation &middot; Frequency-specific cortical swallowing-network responses following neuroengineering-guided individualized multichannel tDCS.</p>
+          <p>探討個體化多頻道 tDCS 對健康成年人吞嚥相關皮質活動的影響，雖無顯著交互作用，但揭示了頻段特異性變化與時準精準度的潛力。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">8 名健康成年志願者</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">個體化多頻道 tDCS（低強度 1.5 mA、高強度 4.0 mA、假刺激）</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">假刺激對照</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">吞嚥相關皮質活動頻帶變化及挑戰任務時準精準度</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span><span class="tag">吞嚥障礙</span><span class="tag">MEG 導航</span><span class="tag">tDCS 參數最適化</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/43026607/" target="_blank">閱讀原文 →</a>
+          </div>
+        </div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#2</span>
+            <span class="emoji-icon">📊</span>
+            <span class="utility-high">高實用性</span>
+          </div>
+          <h3>EEG 深度學習揭示深腦刺激參數的皮質敏感性</h3>
+          <p class="journal-source">NeuroImage &middot; EEG-based Deep Learning Reveals Cortical Sensitivity to Small Changes in Deep Brain Stimulation Parameters.</p>
+          <p>利用深度學習分析 DBS 參數變化導致的皮質 EEG 變化，證實中頻Gamma (55-90Hz) 是檢測微小參數變化的關鍵生物標記，為適應性 DBS 提供了客觀監測方式。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">帕金森病 DBS 病人</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">實時 DBS 參數變化</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">相同與不同 DBS 參數下的 EEG 段</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">透過 EEGNet 辨識 DBS 參數變化的中頻Gamma 皮質響應</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span><span class="tag">DBS 參數最佳化</span><span class="tag">EEG 生物標記</span><span class="tag">中頻Gamma</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/43025559/" target="_blank">閱讀原文 →</a>
+          </div>
+        </div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#3</span>
+            <span class="emoji-icon">⚡</span>
+            <span class="utility-mid">中實用性</span>
+          </div>
+          <h3>個體化 Gamma 入睡刺激的頻率欠匹配模型</h3>
+          <p class="journal-source">Journal of neural engineering &middot; A narrow-bandwidth resonance-gated Kuramoto model of individualized gamma entrainment.</p>
+          <p>利用 Kuramoto 模型模擬 Gamma 刺激中的頻率欠匹配效應，證實窄閾阻礙 entrainment，強調需要依據個體固有 gamma 頻率進行參數調整。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">仿擬被試對象</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">40 Hz Gamma 刺激（GENUS）</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">固定 40 Hz 刺激 vs. 依據個體響應曲線調整的刺激</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">頻率欠匹配顯著降低相位鎖定值，支援個體化刺激參數的必要性</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span><span class="tag">Gamma 刺激</span><span class="tag">個體化參數</span><span class="tag">Kuramoto 模型</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/43024960/" target="_blank">閱讀原文 →</a>
+          </div>
+        </div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#4</span>
+            <span class="emoji-icon">📈</span>
+            <span class="utility-high">高實用性</span>
+          </div>
+          <h3>帕金森病臨床編程中的皮質 mid-gamma 生物標記</h3>
+          <p class="journal-source">NeuroImage &middot; EEG-based Deep Learning Reveals Cortical Sensitivity to Small Changes in Deep Brain Stimulation Parameters.</p>
+          <p>(見 rank 2 之重複條目，實質為同一研究之深入解讀)，強調 mid-gamma oscillations 作為 DBS 參數變化之敏感生物標記，其不受 1:2 gamma 絲門效應影響。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">帕金森病 DBS 病人</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">DBS 參數調整</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">相同與不同參數下的 EEG 段</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">mid-gamma (55-90Hz) 作為檢測微小參數變化的關鍵生物標記</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span><span class="tag">DBS 參數最佳化</span><span class="tag">EEG 生物標記</span><span class="tag">mid-gamma</span><span class="tag">帕金森病</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/43025559/" target="_blank">閱讀原文 →</a>
+          </div>
+        </div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#5</span>
+            <span class="emoji-icon">🎯</span>
+            <span class="utility-mid">中實用性</span>
+          </div>
+          <h3>痴呆症患者 Gamma 刺激之個體化處方理論</h3>
+          <p class="journal-source">Journal of neural engineering &middot; A narrow-bandwidth resonance-gated Kuramoto model of individualized gamma entrainment.</p>
+          <p>理論模型研究顯示，Gamma 刺激的有效性高度依賴刺激頻率與個體腦部固有共振頻率之匹配度，窄閾會導致 entrainment 效果驟降。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">認知受損/阿茲海默症風險群</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">Gamma 經顱磁刺激（40 Hz）</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">個體化頻率處方 vs. 固定 40 Hz</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">證明頻率匹配度是決定刺激效果的關鍵變項</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span><span class="tag">Gamma 刺激</span><span class="tag">個體化參數</span><span class="tag">阿茲海默症</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/43024960/" target="_blank">閱讀原文 →</a>
+          </div>
+        </div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#6</span>
+            <span class="emoji-icon">🩺</span>
+            <span class="utility-low">低實用性</span>
+          </div>
+          <h3>7T MRI 揭示腦海馬下丘顆粒體老化與微血管變化</h3>
+          <p class="journal-source">NeuroImage &middot; Choroid plexus remodeling in aging and cerebrovascular disease revealed by contrast-enhanced 7T MRI.</p>
+          <p>利用 7T 對比增強黑血成像 visualise 完整腦海馬下丘，發現其形態隨年齡與微血管疾病變化（膠囊增多、長度縮短），雖非 rTMS 直接研究，但為神經調控研究提供了腦基底解剖與生理標記。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">234 名接受腦血管評估者</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">7T contrast-enhanced black-blood MRI</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">傳統 T1-weighted MRI</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">發現海馬下丘體積、形態與年齡、微出血相關的定量變化</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">神經影像導航</span><span class="tag">海馬下丘</span><span class="tag">老化</span><span class="tag">7T MRI</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/43025560/" target="_blank">閱讀原文 →</a>
+          </div>
+        </div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#7</span>
+            <span class="emoji-icon">🔬</span>
+            <span class="utility-low">低實用性</span>
+          </div>
+          <h3>腦 interstitial fluid 變微妙變化研究</h3>
+          <p class="journal-source">NeuroImage &middot; Application of magnetic tracer technology to quantitatively measure brain interstitial fluid changes in rats exposed to simulated microgravity.</p>
+          <p>動物模型研究顯示微重力導致腦間質流動改變與 ECS 重構，闡明了神經微環境動態，為未來 rTMS 等神經調控干預對腦間質的影響提供生理學背景。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">尾懸固定大鼠（模擬微重力）</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">動態對比增強 MRI 及 ECS 參數分析</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">HU3 (3天) vs. HU7 (7天) 時間點</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">區域特異性腦間質流動變化與細胞死亡前的窗口期特徵</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span><span class="tag">腦間質</span><span class="tag">微環境</span><span class="tag">動物研究</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/43025557/" target="_blank">閱讀原文 →</a>
+          </div>
+        </div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#8</span>
+            <span class="emoji-icon">🗺️</span>
+            <span class="utility-mid">中實用性</span>
+          </div>
+          <h3>杏仁核亞核連結組學圖譜</h3>
+          <p class="journal-source">NeuroImage &middot; Mesoscale connectivity of substructures within the human amygdaloid complex.</p>
+          <p>提供杏仁核亞核連結的高解析度 3D 圖譜，闡明其內部連結通路與輸入輸出樣式，作為未來針對情緒/焦慮障礙 rTMS 目標區域選擇的 structural roadmap。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">解剖標本</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">擴散 MRI 連結組學分析</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">N/A - 解剖結構描繪</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">生成杏仁核亞核、連馳路徑的詳細 3D 視覺化與量分析</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span><span class="tag">杏仁核</span><span class="tag">連結組學</span><span class="tag">情緒調控</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/43025556/" target="_blank">閱讀原文 →</a>
+          </div>
+        </div></div>
+
+  <div class='section'><div class='section-title'><span class='section-icon'>📚</span>其他值得關注的文獻</div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🖌️</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>基於 lesion-aware post-training 的 3D 大腦跨模態影像翻譯</h3>
+          <p class="journal-source">NeuroImage</p>
+          <p>提出 latent diffusion models (LDM) 的 post-training 框架，結合 lesion-specific objectives 顯著提升 ischemic lesion 在 CT-to-MRI translation 中的保真度與檢測敏感性。</p>
+          <div class="card-footer">
+            <span class="tag">神經影像技術</span><span class="tag">擴散 MRI</span><span class="tag"> latent diffusion model</span><span class="tag">卒中</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/43025558/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">📖</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>腦海馬下丘形態與老化、血管病變關係的 narrative review</h3>
+          <p class="journal-source">NeuroImage. Clinical</p>
+          <p>綜述系統性因素（高血壓、自身免疫病、長新冠等）對血腦屏障完整性的影響，證實系統性炎症是關鍵機制，為 rTMS 等神經調控治療中之共存病理提供生物學背景。</p>
+          <div class="card-footer">
+            <span class="tag">血腦屏障</span><span class="tag">系統性炎症</span><span class="tag">MRI 標記</span><span class="tag">系統性疾病</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/43025316/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🧠</span>
+            <span class="utility-high utility-sm">高</span>
+          </div>
+          <h3>深部腦刺激參數偵渋 EEG 連結組學研究</h3>
+          <p class="journal-source">NeuroImage</p>
+          <p>(見 top_picks rank 2/4 重複條目，此處列出為完整文獻集合，研究 DBS 參數變化的皮質 EEG 響應模式)。</p>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span><span class="tag">DBS</span><span class="tag">EEG 生物標記</span><span class="tag">帕金森病</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/43025559/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🔬</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>腦微環境變化於微重力條件下的動態影像研究</h3>
+          <p class="journal-source">NeuroImage</p>
+          <p>(見 top_picks rank 7 重複條目，此處列出為完整文獻集合，研究微重力下腦間質流動變化)。</p>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span><span class="tag">腦間質</span><span class="tag">微環境</span><span class="tag">動物研究</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/43025557/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🗺️</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>杏仁核亞核 meso-scale 連結組學圖譜</h3>
+          <p class="journal-source">NeuroImage</p>
+          <p>(見 top_picks rank 8 重複條目，此處列出為完整文獻集合，提供杏仁核連結組學圖譜)。</p>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span><span class="tag">杏仁核</span><span class="tag">連結組學</span><span class="tag">情緒調控</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/43025556/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🧠</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>吞嚥障礙個體化 tDCS 研究</h3>
+          <p class="journal-source">Journal of neuroengineering and rehabilitation</p>
+          <p>(見 top_picks rank 1 重複條目，此處列出為完整文獻集合，探討吞嚥網絡的 tDCS 響應)。</p>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span><span class="tag">吞嚥障礙</span><span class="tag">tDCS</span><span class="tag">MEG 導航</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/43026607/" target="_blank">PubMed →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">⚡</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>Gamma 刺激頻率欠匹配理論模型</h3>
+          <p class="journal-source">Journal of neural engineering</p>
+          <p>(見 top_picks rank 3/5 重複條目，此處列出為完整文獻集合，探討 Gamma 刺激的頻率匹配理論)。</p>
+          <div class="card-footer">
+            <span class="tag">神經調控技術</span><span class="tag">Gamma 刺激</span><span class="tag">個體化參數</span><span class="tag">阿茲海默症</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/43024960/" target="_blank">PubMed →</a>
+          </div>
+        </div></div>
+
+  <div class='topic-section section'><div class='section-title'><span class='section-icon'>📊</span>主題分佈</div>
+            <div class="topic-row">
+              <span class="topic-name">神經調控技術</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:100%"></div></div>
+              <span class="topic-count">5</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">憂鬱症/情緒調控</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:60%"></div></div>
+              <span class="topic-count">3</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">影像與生物標記</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:60%"></div></div>
+              <span class="topic-count">3</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">吞嚥障礙</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:20%"></div></div>
+              <span class="topic-count">1</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">帕金森病/DBS</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:20%"></div></div>
+              <span class="topic-count">1</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">阿茲海默症/Gamma 刺激</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:20%"></div></div>
+              <span class="topic-count">1</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">血腦屏障</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:20%"></div></div>
+              <span class="topic-count">1</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">連結組學</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:20%"></div></div>
+              <span class="topic-count">1</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">微環境/微重力</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:20%"></div></div>
+              <span class="topic-count">1</span>
+            </div></div>
+
+  <div class='keywords-section section'><div class='section-title'><span class='section-icon'>🏷️</span>關鍵字</div><div class='keywords'><span class="keyword">rTMS</span><span class="keyword">神經調控</span><span class="keyword">Gamma 刺激</span><span class="keyword">個體化</span><span class="keyword">DBS 參數</span><span class="keyword">吞嚥障礙</span><span class="keyword">血腦屏障</span><span class="keyword">連結組學</span><span class="keyword">7T MRI</span><span class="keyword">Kuramoto 模型</span></div></div>
+
+  <div class="clinic-banner">
+    <a href="https://www.leepsyclinic.com/" class="clinic-link" target="_blank">
+      <span class="clinic-icon">🏥</span>
+      <span class="clinic-name">李政洋身心診所首頁</span>
+      <span class="clinic-arrow">→</span>
+    </a>
+  </div>
+
+  <footer>
+    <span>資料來源：PubMed &middot; 分析模型：nvidia/nemotron-3.5-lightning-30b-a3b</span>
+    <span><a href="https://github.com/u8901006/rTMS-brain">GitHub</a></span>
+  </footer>
+</div>
+</body>
+</html>
